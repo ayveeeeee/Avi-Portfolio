@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Minimal Case Study Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @font-face {
+      font-family: 'Awesome';
+      src: url('fonts/awesome-light.otf') format('opentype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    
+    @font-face {
+      font-family: 'Awesome';
+      src: url('fonts/awesome-medium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    :root {
+      --bg: #f5f5f7;
+      --bg-elevated: #ffffff;
+      --bg-gradient-start: #ffffff;
+      --bg-gradient-end: #f5f5f7;
+      --border-subtle: rgba(0, 0, 0, 0);
+      --text-main: #0b0b0f;
+      --text-muted: #7a7a80;
+      --accent: #0071e3;
+      --accent-soft: rgba(0, 113, 227, 0.08);
+      --nav-bg: rgba(245, 245, 247, 0.88);
+      --nav-bg-scrolled: rgba(245, 245, 247, 0.98);
+      --card-bg-start: rgba(255, 255, 255, 0.95);
+      --card-bg-end: rgba(250, 250, 252, 0.98);
+      --case-card-bg-start: #ffffff;
+      --case-card-bg-end: #f7f7fa;
+      --case-visual-bg-start: #e5f1ff;
+      --case-visual-bg-end: #f5f5f7;
+      --logo-bg: rgba(255, 255, 255, 0.9);
+      --pill-bg: rgba(255, 255, 255, 0.9);
+      --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.7), 0 6px 12px rgba(0, 0, 0, 0.12);
+      --shadow-md: 0 14px 40px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.03);
+      --shadow-xl: 0 20px 55px rgba(0, 0, 0, 0.06);
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --transition-fast: 180ms ease-out;
+    }
+
+    body.dark-mode {
+      --bg: #0a0a0f;
+      --bg-elevated: #1a1a24;
+      --bg-gradient-start: #1a1a24;
+      --bg-gradient-end: #0a0a0f;
+      --text-main: #e8e8ed;
+      --text-muted: #9a9aa5;
+      --accent: #4a9eff;
+      --accent-soft: rgba(74, 158, 255, 0.15);
+      --nav-bg: rgba(10, 10, 15, 0.88);
+      --nav-bg-scrolled: rgba(10, 10, 15, 0.98);
+      --card-bg-start: rgba(26, 26, 36, 0.95);
+      --card-bg-end: rgba(20, 20, 30, 0.98);
+      --case-card-bg-start: #1a1a24;
+      --case-card-bg-end: #12121a;
+      --case-visual-bg-start: #1e2a3f;
+      --case-visual-bg-end: #0f1419;
+      --logo-bg: rgba(26, 26, 36, 0.9);
+      --pill-bg: rgba(26, 26, 36, 0.9);
+      --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 6px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 14px 40px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.2);
+      --shadow-xl: 0 20px 55px rgba(0, 0, 0, 0.4);
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at top, var(--bg-gradient-start) 0, var(--bg-gradient-end) 52%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      padding-top: 72px; /* space for fixed nav */
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* NAVBAR */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6vw;
+      backdrop-filter: blur(18px);
+      background: var(--nav-bg);
+      z-index: 20;
+      transition: background var(--transition-fast),
+        box-shadow var(--transition-fast);
+    }
+
+    .nav--scrolled {
+      background: var(--nav-bg-scrolled);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--logo-bg);
+    }
+
+    .dark-mode-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: var(--logo-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform var(--transition-fast), background var(--transition-fast);
+    }
+
+    .dark-mode-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .dark-mode-toggle svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .dark-mode-toggle:active svg {
+      transform: rotate(180deg);
+    }
+
+    .logo-mark {
+      width: 18px;
+      height: 18px;
+      border-radius: 8px;
+      background: conic-gradient(
+        from 210deg,
+        #0071e3,
+        #34c759,
+        #ff9f0a,
+        #ff375f,
+        #0071e3
+      );
+      box-shadow: var(--shadow-sm);
+    }
+
+    .logo-text {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-link-group {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 4px 0;
+      cursor: pointer;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent);
+      transition: width var(--transition-fast);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.nav-link--primary {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+    }
+
+    .nav-link.nav-link--primary::after {
+      display: none;
+    }
+
+    /* LAYOUT HELPERS */
+    .page {
+      max-width: 90%;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    section {
+      margin-bottom: 72px;
+    }
+
+    /* HERO */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-top: 16px;
+    }
+
+    .hero-kicker {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-kicker-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #34c759;
+      box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.18);
+    }
+
+    .hero-title {
+      font-family: 'Awesome', system-ui, -apple-system, sans-serif;
+      font-weight: 500;
+      font-size: clamp(38px, 4vw, 48px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      max-width: 20ch;
+    }
+
+    .hero-title span {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px 6px 6px;
+      border-radius: 999px;
+      background: var(--pill-bg);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 8px;
+    }
+
+    .hero-title span svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 42ch;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .hero-pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--pill-bg);
+    }
+
+    /* CASE STUDIES */
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .case-gallery {
+      border-radius: var(--radius-xl);
+      background: linear-gradient(
+        135deg,
+        var(--card-bg-start),
+        var(--card-bg-end)
+      );
+      padding: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .case-card {
+      padding: 18px 18px 20px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, var(--case-card-bg-start) 0, var(--case-card-bg-end) 55%);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1 1 260px;
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+    }
+
+    .case-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .case-visual {
+      height: 120px;
+      border-radius: 16px;
+      background: radial-gradient(circle at top left, var(--case-visual-bg-start), var(--case-visual-bg-end));
+      margin-bottom: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-visual::before {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: 18px;
+      background: linear-gradient(
+        120deg,
+        rgba(0, 113, 227, 0.7),
+        rgba(0, 0, 0, 0.9)
+      );
+      opacity: 0.18;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .case-visual::after {
+      content: "";
+      position: absolute;
+      width: 220%;
+      height: 220%;
+      left: -60%;
+      top: 40%;
+      border-radius: 999px;
+      opacity: 0.6;
+    }
+
+    .case-meta {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .case-title {
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .case-desc-inline {
+      font-size: 13px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .case-summary {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding-top: 32px;
+      margin-top: 48px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 220px;
+    }
+
+    .footer-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 8px 0 8px;
+    }
+
+    .footer-heading {
+      font-size: clamp(30px, 3.2vw, 38px);
+      letter-spacing: -0.04em;
+      max-width: 8ch;
+    }
+
+    .footer-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 26ch;
+    }
+
+    .footer-image-wrap {
+      flex: 1.2;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      overflow: visible;
+    }
+
+    .footer-image {
+      width: 100%;
+      max-width: 420px;
+      transform: translateX(8%);
+      filter: drop-shadow(0 26px 60px rgba(0, 0, 0, 0.22));
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav {
+        padding: 0 16px;
+      }
+
+      .nav-right {
+        gap: 12px;
+      }
+
+      .nav-right .nav-link-group {
+        display: none;
+      }
+
+      .page {
+        padding-inline: 16px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+
+      .footer-image-wrap {
+        justify-content: flex-start;
+      }
+
+      .footer-image {
+        transform: translateX(0);
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding-top: 4px;
+      }
+
+      .hero-title span {
+        width: 100%;
+      }
+
+      .case-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="nav" id="nav">
+    <div class="nav-left">
+      <a href="#top" class="logo" data-scroll>
+        <span class="logo-mark"></span>
+        <span class="logo-text">Studio</span>
+      </a>
+      <nav class="nav-link-group">
+        <a class="nav-link" href="#work" data-scroll>Work</a>
+        <a class="nav-link" href="#case-studies" data-scroll>Case Studies</a>
+        <a class="nav-link" href="#about" data-scroll>About</a>
+      </nav>
+    </div>
+    <div class="nav-right">
+      <nav class="nav-link-group">
+        <a class="nav-link" href="#process" data-scroll>Process</a>
+        <a class="nav-link" href="#journal" data-scroll>Journal</a>
+        <a class="nav-link nav-link--primary" href="#contact" data-scroll>
+          Contact
+        </a>
+      </nav>
+      <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" style="display: none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="page">
+      <!-- HERO -->
+      <section class="hero" id="about">
+        <div class="hero-kicker">
+          <span class="hero-kicker-dot"></span>
+          Product design & case studies
+        </div>
+        <h1 class="hero-title">
+          <span>
+           
+            Quiet, clear interfaces.
+          </span>
+          <br>
+          Built to feel obvious the first time you use them.
+        </h1>
+        <p class="hero-subtitle">
+          A minimal case study layout that lets the work breathe. No noise, no
+          extras—only the decisions that matter and the stories behind them.
+        </p>
+        <div class="hero-meta">
+          <span class="hero-pill">End-to-end product thinking</span>
+          <span class="hero-pill">Interaction, visuals & systems</span>
+          <span class="hero-pill">Web · Product · Brand</span>
+        </div>
+      </section>
+
+      <!-- CASE STUDIES -->
+      <section id="case-studies">
+        <p class="section-label">Case Studies Gallery</p>
+        <div class="case-gallery">
+          <!-- Case 1 -->
+          <article class="case-card">
+            <div class="case-visual" aria-hidden="true"></div>
+            <div class="case-meta">
+              <h3 class="case-title">BriefTutor workspace</h3>
+              <p class="case-desc-inline">
+                Assignment clarity for overwhelmed students
+              </p>
+            </div>
+            <p class="case-summary">
+              A visual assignment manager that turns dense briefs into a calm
+              flow of steps. Designed to reduce cognitive load and make every
+              task feel finishable.
+            </p>
+          </article>
+
+          <!-- Case 2 -->
+          <article class="case-card">
+            <div class="case-visual" aria-hidden="true"></div>
+            <div class="case-meta">
+              <h3 class="case-title">Betbot insights</h3>
+              <p class="case-desc-inline">
+                Frictionless stats in one clean surface
+              </p>
+            </div>
+            <p class="case-summary">
+              A single page that pulls lines, odds, and movement into a
+              structured comparison view. No dashboards, just focused,
+              glanceable decisions.
+            </p>
+          </article>
+
+          <!-- Case 3 -->
+          <article class="case-card">
+            <div class="case-visual" aria-hidden="true"></div>
+            <div class="case-meta">
+              <h3 class="case-title">LaunchExit marketplace</h3>
+              <p class="case-desc-inline">
+                Quiet deal room for bootstrapped SaaS
+              </p>
+            </div>
+            <p class="case-summary">
+              A small acquisition marketplace built around trust badges, simple
+              cards, and a reading experience that feels closer to a document
+              than a feed.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Dummy anchors to satisfy nav links (kept visually minimal) -->
+      <section id="work" style="height: 1px;"></section>
+      <section id="process" style="height: 1px;"></section>
+      <section id="journal" style="height: 1px;"></section>
+      <section id="contact" style="height: 1px;"></section>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="footer-inner">
+          <div class="footer-text">
+            <h2 class="footer-heading">Let’s work together.</h2>
+            <p class="footer-note">
+              Send a brief, a problem, or a half-finished idea. The first step
+              is a simple outline of what needs to feel better.
+            </p>
+          </div>
+          <div class="footer-image-wrap">
+            <!-- big image, allowed to overflow -->
+            <img
+              class="footer-image"
+              alt="Abstract light panel mockup"
+              src="data:image/svg+xml;utf8,
+                <svg xmlns='http://www.w3.org/2000/svg' width='900' height='600' viewBox='0 0 900 600'>
+                  <defs>
+                    <linearGradient id='bg' x1='0%' y1='0%' x2='100%' y2='100%'>
+                      <stop offset='0%' stop-color='%23f5f5f7'/>
+                      <stop offset='100%' stop-color='%23e4e4ea'/>
+                    </linearGradient>
+                    <linearGradient id='panel' x1='0%' y1='0%' x2='100%' y2='100%'>
+                      <stop offset='0%' stop-color='%23ffffff'/>
+                      <stop offset='100%' stop-color='%23f1f6ff'/>
+                    </linearGradient>
+                  </defs>
+                  <rect width='900' height='600' fill='url(%23bg)' rx='80'/>
+                  <g transform='translate(140,90)'>
+                    <rect x='0' y='0' width='620' height='380' rx='48' fill='url(%23panel)' />
+                    <rect x='46' y='64' width='320' height='7' rx='3.5' fill='%23d0d3dd' opacity='0.8'/>
+                    <rect x='46' y='102' width='260' height='7' rx='3.5' fill='%23d0d3dd' opacity='0.66'/>
+                    <rect x='46' y='140' width='200' height='7' rx='3.5' fill='%23d0d3dd' opacity='0.54'/>
+                    <rect x='46' y='204' width='210' height='18' rx='9' fill='%230071e3' opacity='0.18'/>
+                    <rect x='46' y='244' width='160' height='18' rx='9' fill='%230071e3' opacity='0.10'/>
+                    <rect x='380' y='64' width='160' height='120' rx='24' fill='%23ecefff'/>
+                    <circle cx='460' cy='124' r='40' fill='%23ffffff'/>
+                    <circle cx='460' cy='124' r='20' fill='%230071e3' opacity='0.85'/>
+                  </g>
+                </svg>"
+            />
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <!-- GSAP & Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  
+  <script>
+    // Register GSAP plugins
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+    // Smooth scroll for in-page nav links with GSAP
+    document.querySelectorAll("[data-scroll]").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        const href = link.getAttribute("href");
+        if (!href || !href.startsWith("#")) return;
+        event.preventDefault();
+        const target = document.querySelector(href);
+        if (!target) return;
+        
+        gsap.to(window, {
+          duration: 1.2,
+          scrollTo: { y: target, offsetY: 80 },
+          ease: "power3.inOut"
+        });
+      });
+    });
+
+    // Navbar shadow on scroll with GSAP
+    const nav = document.getElementById("nav");
+    ScrollTrigger.create({
+      start: "top -10",
+      onEnter: () => nav.classList.add("nav--scrolled"),
+      onLeaveBack: () => nav.classList.remove("nav--scrolled")
+    });
+
+    // ===== HERO ANIMATIONS =====
+    
+    // Hero kicker fade in from left
+    gsap.from(".hero-kicker", {
+      opacity: 0,
+      x: -50,
+      duration: 1,
+      ease: "power3.out",
+      delay: 0.2
+    });
+
+    // Hero title - split animation
+    gsap.from(".hero-title", {
+      opacity: 0,
+      y: 50,
+      duration: 1.2,
+      ease: "power3.out",
+      delay: 0.4
+    });
+
+    // Hero title span (with icon) - scale in
+    gsap.from(".hero-title span", {
+      scale: 0.8,
+      opacity: 0,
+      duration: 0.8,
+      ease: "back.out(1.7)",
+      delay: 0.6
+    });
+
+    // Hero subtitle fade up
+    gsap.from(".hero-subtitle", {
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      ease: "power3.out",
+      delay: 0.8
+    });
+
+    // Hero pills stagger animation
+    gsap.from(".hero-pill", {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power3.out",
+      delay: 1
+    });
+
+    // ===== SCROLL-TRIGGERED ANIMATIONS =====
+
+    // (Case studies: all GSAP animations removed per request)
+
+    // ===== FOOTER ANIMATIONS =====
+
+    // Footer heading
+    gsap.from(".footer-heading", {
+      scrollTrigger: {
+        trigger: "footer",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      },
+      opacity: 0,
+      x: -50,
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    // Footer note
+    gsap.from(".footer-note", {
+      scrollTrigger: {
+        trigger: "footer",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      },
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      delay: 0.2,
+      ease: "power3.out"
+    });
+
+    // Footer image - slide in from right with rotation
+    gsap.from(".footer-image", {
+      scrollTrigger: {
+        trigger: "footer",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      },
+      opacity: 0,
+      x: 100,
+      rotation: 5,
+      duration: 1.2,
+      delay: 0.3,
+      ease: "power3.out"
+    });
+
+    // ===== INTERACTIVE HOVER ANIMATIONS =====
+
+    // Logo hover
+    const logo = document.querySelector(".logo");
+    logo.addEventListener("mouseenter", () => {
+      gsap.to(".logo-mark", {
+        rotation: 360,
+        scale: 1.1,
+        duration: 0.6,
+        ease: "back.out(1.7)"
+      });
+    });
+    logo.addEventListener("mouseleave", () => {
+      gsap.to(".logo-mark", {
+        rotation: 0,
+        scale: 1,
+        duration: 0.4,
+        ease: "power2.out"
+      });
+    });
+
+    // (Case card hover GSAP removed; cards now use pure CSS hover only)
+
+    // Nav links hover - underline animation
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("mouseenter", () => {
+        gsap.to(link, {
+          color: "#0071e3",
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+      
+      link.addEventListener("mouseleave", () => {
+        gsap.to(link, {
+          color: "#7a7a80",
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+    });
+
+    // Hero pills hover
+    document.querySelectorAll(".hero-pill").forEach(pill => {
+      pill.addEventListener("mouseenter", () => {
+        gsap.to(pill, {
+          scale: 1.05,
+          y: -3,
+          duration: 0.3,
+          ease: "back.out(1.7)"
+        });
+      });
+      
+      pill.addEventListener("mouseleave", () => {
+        gsap.to(pill, {
+          scale: 1,
+          y: 0,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+    });
+
+    // ===== CONTINUOUS ANIMATIONS =====
+
+    // Hero kicker dot pulse
+    gsap.to(".hero-kicker-dot", {
+      scale: 1.2,
+      opacity: 0.7,
+      duration: 1.5,
+      repeat: -1,
+      yoyo: true,
+      ease: "power1.inOut"
+    });
+
+    // Parallax effect for page on scroll
+    gsap.to(".page", {
+      scrollTrigger: {
+        trigger: "body",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1
+      },
+      y: -50,
+      ease: "none"
+    });
+
+    // ===== DARK MODE TOGGLE =====
+    
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const sunIcon = darkModeToggle.querySelector(".sun-icon");
+    const moonIcon = darkModeToggle.querySelector(".moon-icon");
+    
+    // Check for saved dark mode preference
+    const isDarkMode = localStorage.getItem("darkMode") === "true";
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+      sunIcon.style.display = "none";
+      moonIcon.style.display = "block";
+    }
+    
+    // Toggle dark mode
+    darkModeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      const isNowDark = document.body.classList.contains("dark-mode");
+      
+      // Toggle icons
+      if (isNowDark) {
+        sunIcon.style.display = "none";
+        moonIcon.style.display = "block";
+      } else {
+        sunIcon.style.display = "block";
+        moonIcon.style.display = "none";
+      }
+      
+      // Save preference
+      localStorage.setItem("darkMode", isNowDark);
+    });
+    
+    console.log("🎨 GSAP Animations Loaded!");
+  </script>
+</body>
+</html>
