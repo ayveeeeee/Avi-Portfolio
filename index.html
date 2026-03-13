@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Minimal Case Study Portfolio</title>
+  <title>Avilenne Lara</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="img/avi brand logo.svg" />
   <style>
     @font-face {
       font-family: 'Awesome';
@@ -19,18 +20,32 @@
       font-style: normal;
     }
 
+    @font-face {
+      font-family: 'Freight Text Pro Semibold';
+      src: url('fonts/fonnts.com-Freight-Text-Pro-Semibold-.otf') format('opentype');
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Manrope-Medium';
+      src: url('fonts/Manrope-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
     :root {
       --bg: #f5f5f7;
       --bg-elevated: #ffffff;
       --bg-gradient-start: #ffffff;
       --bg-gradient-end: #f5f5f7;
       --border-subtle: rgba(0, 0, 0, 0);
-      --text-main: #0b0b0f;
+      --text-main: #2f332f;
       --text-muted: #7a7a80;
       --accent: #0071e3;
       --accent-soft: rgba(0, 113, 227, 0.08);
-      --nav-bg: rgba(245, 245, 247, 0.88);
-      --nav-bg-scrolled: rgba(245, 245, 247, 0.98);
+      --nav-bg: rgba(245, 245, 247, 0.55);
+      --nav-bg-scrolled: rgba(245, 245, 247, 0.75);
       --card-bg-start: rgba(255, 255, 255, 0.95);
       --card-bg-end: rgba(250, 250, 252, 0.98);
       --case-card-bg-start: #ffffff;
@@ -38,7 +53,7 @@
       --case-visual-bg-start: #e5f1ff;
       --case-visual-bg-end: #f5f5f7;
       --logo-bg: rgba(255, 255, 255, 0.9);
-      --pill-bg: rgba(255, 255, 255, 0.9);
+      --pill-bg: rgba(230, 230, 235, 0.9);
       --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.7), 0 6px 12px rgba(0, 0, 0, 0.12);
       --shadow-md: 0 14px 40px rgba(0, 0, 0, 0.06);
       --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.03);
@@ -46,6 +61,13 @@
       --radius-lg: 20px;
       --radius-xl: 28px;
       --transition-fast: 180ms ease-out;
+      /* Case-study accent mirrors */
+      --case1-accent: #E57714;
+      --case1-accent-soft: rgba(229, 119, 20, 0.15);
+      --case2-accent: #c7cdd6;
+      --case2-accent-soft: rgba(199, 205, 214, 0.3);
+      --case3-accent: #e67e80;
+      --case3-accent-soft: rgba(230, 126, 128, 0.15);
     }
 
     body.dark-mode {
@@ -57,8 +79,8 @@
       --text-muted: #9a9aa5;
       --accent: #4a9eff;
       --accent-soft: rgba(74, 158, 255, 0.15);
-      --nav-bg: rgba(10, 10, 15, 0.88);
-      --nav-bg-scrolled: rgba(10, 10, 15, 0.98);
+      --nav-bg: rgba(10, 10, 15, 0.55);
+      --nav-bg-scrolled: rgba(10, 10, 15, 0.75);
       --card-bg-start: rgba(26, 26, 36, 0.95);
       --card-bg-end: rgba(20, 20, 30, 0.98);
       --case-card-bg-start: #1a1a24;
@@ -80,19 +102,145 @@
       padding: 0;
     }
 
-    html,
-    body {
-      height: 100%;
+    html {
+      scroll-behavior: smooth;
+      min-height: 100%;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+      font-family: "Manrope-Medium", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
         "Helvetica Neue", Arial, sans-serif;
       background: radial-gradient(circle at top, var(--bg-gradient-start) 0, var(--bg-gradient-end) 52%);
       color: var(--text-main);
       -webkit-font-smoothing: antialiased;
-      padding-top: 72px; /* space for fixed nav */
+      padding-top: 72px;
+      padding-bottom: 0;
       transition: background 0.3s ease, color 0.3s ease;
+      cursor: none;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Paper texture overlay - scrolls with content, crisp and continuous */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('img/paper.png');
+      background-repeat: repeat;
+      background-size: 500px 593px;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body.dark-mode::before {
+      opacity: 0.18;
+    }
+
+    /* Ensure all direct children of body are above the texture */
+    body > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    body.transitioning {
+      overflow: hidden;
+    }
+
+    /* Global heading styles - ensure all headings use Freight Text Pro Semibold */
+    h1, h2, h3 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-weight: 600;
+    }
+
+    /* Custom Cursor */
+    * {
+      cursor: none !important;
+    }
+    
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 2147483647;
+      transform: translate(-50%, -50%);
+      background: #2f332f;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+      will-change: transform;
+      opacity: 1;
+      display: block;
+      visibility: visible;
+    }
+
+    body.dark-mode .custom-cursor {
+      background: #e8e8ed;
+      border: 2px solid #0a0a0f;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    body.hovering-link .custom-cursor {
+      transform: translate(-50%, -50%) scale(1.3);
+    }
+
+    /* Cursor "View" label for case study cards */
+    .cursor-label {
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: 10px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-family: 'Manrope-Medium', 'Manrope', system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+      background: rgba(255, 255, 255, 0.95);
+      color: #1a1a24;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    /* View mode: cursor dot becomes light/inverted */
+    body.cursor-view-mode .custom-cursor {
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    body.cursor-view-mode .cursor-label {
+      opacity: 1;
+    }
+
+    /* Dark mode view cursor - inverted to dark pill */
+    body.dark-mode.cursor-view-mode .custom-cursor {
+      background: rgba(26, 26, 36, 0.95);
+      border: 2px solid rgba(26, 26, 36, 0.95);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode .cursor-label {
+      background: rgba(26, 26, 36, 0.95);
+      color: #f5f5f7;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Hide view cursor on touch devices */
+    @media (hover: none) and (pointer: coarse) {
+      .cursor-label {
+        display: none !important;
+      }
     }
 
     a {
@@ -111,21 +259,53 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 72px;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 24px 48px;
+      pointer-events: none;
+      transition: all 0.35s ease;
+    }
+
+    .nav__inner {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 6vw;
-      backdrop-filter: blur(18px);
-      background: var(--nav-bg);
-      z-index: 20;
-      transition: background var(--transition-fast),
-        box-shadow var(--transition-fast);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-bottom: 16px;
+      pointer-events: auto;
+      background: transparent;
+      transition: all 0.35s ease;
     }
 
-    .nav--scrolled {
-      background: var(--nav-bg-scrolled);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+    body.dark-mode .nav__inner {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* Floating pill state */
+    .nav.nav--floating {
+      top: 0;
+    }
+
+    .nav.nav--floating .nav__inner {
+      max-width: 760px;
+      padding: 10px 24px;
+      border-bottom: none;
+      border-radius: 999px;
+      background: rgba(230, 230, 235, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+    }
+
+    body.dark-mode .nav.nav--floating .nav__inner {
+      background: rgba(20, 20, 25, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
     }
 
     .nav-left,
@@ -133,72 +313,55 @@
       display: flex;
       align-items: center;
       gap: 24px;
+      transition: gap 0.25s ease;
     }
 
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: var(--logo-bg);
-    }
-
-    .dark-mode-toggle {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      background: var(--logo-bg);
+    .nav-center {
       display: flex;
       align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform var(--transition-fast), background var(--transition-fast);
+      gap: 24px;
+      transition: gap 0.25s ease;
     }
 
-    .dark-mode-toggle:hover {
-      transform: scale(1.1);
+    .nav.nav--floating .nav-left,
+    .nav.nav--floating .nav-right {
+      gap: 16px;
     }
 
-    .dark-mode-toggle svg {
-      width: 18px;
-      height: 18px;
-      transition: transform 0.3s ease;
+    .nav.nav--floating .nav-center {
+      gap: 16px;
     }
 
-    .dark-mode-toggle:active svg {
-      transform: rotate(180deg);
+    .nav.nav--floating .nav-left {
+      padding-right: 20px;
+      margin-right: 16px;
+      border-right: 1px solid rgba(0, 0, 0, 0.08);
     }
 
-    .logo-mark {
-      width: 18px;
-      height: 18px;
-      border-radius: 8px;
-      background: conic-gradient(
-        from 210deg,
-        #0071e3,
-        #34c759,
-        #ff9f0a,
-        #ff375f,
-        #0071e3
-      );
-      box-shadow: var(--shadow-sm);
+    body.dark-mode .nav.nav--floating .nav-left {
+      border-right-color: rgba(255, 255, 255, 0.12);
     }
 
-    .logo-text {
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .brand-logo-link {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .brand-logo {
+      height: 40px;
+      width: auto;
+      display: block;
     }
 
     .nav-link-group {
       display: flex;
-      gap: 18px;
-      font-size: 14px;
-      color: var(--text-muted);
+      gap: 24px;
+      font-size: 15px;
+      color: var(--text-main);
     }
 
     .nav-link {
+      font-family: "Manrope-Medium", system-ui, sans-serif;
       position: relative;
       padding: 4px 0;
       cursor: pointer;
@@ -210,9 +373,9 @@
       left: 0;
       bottom: -4px;
       width: 0;
-      height: 2px;
+      height: 2.5px;
       border-radius: 999px;
-      background: var(--accent);
+      background: #c92380;
       transition: width var(--transition-fast);
     }
 
@@ -223,9 +386,15 @@
     .nav-link.nav-link--primary {
       padding: 6px 14px;
       border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 13px;
+      background: #c92380;
+      color: var(--bg-elevated);
+      font-size: 14px;
+      transition: opacity var(--transition-fast), background var(--transition-fast);
+    }
+
+    .nav-link.nav-link--primary:hover {
+      opacity: 0.85;
+      background: #b01e6f;
     }
 
     .nav-link.nav-link--primary::after {
@@ -236,19 +405,105 @@
     .page {
       max-width: 90%;
       margin: 0 auto;
-      padding: 40px 20px 80px;
+      padding: 0 20px 80px;
+    }
+
+    .page > .hero {
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
     section {
-      margin-bottom: 72px;
+      margin-bottom: 48px;
+    }
+
+    #case-studies {
+      margin-top: 0;
     }
 
     /* HERO */
     .hero {
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      padding-top: 16px;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      height: calc(100vh - 72px);
+      min-height: calc(100vh - 72px);
+      padding: 0 20px;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    /* Sticker Banner - animated frames */
+    .sticker-banner {
+      --bannerScale: 1.15;
+      position: relative;
+      width: min(1040px, 92vw);
+      aspect-ratio: 16 / 5;
+      margin: -8px auto 24px auto;
+      border-radius: 16px;
+      overflow: hidden;
+      transform: scale(var(--bannerScale));
+      transform-origin: center;
+    }
+
+    /* Fallback for browsers without aspect-ratio support */
+    @supports not (aspect-ratio: 16 / 5) {
+      .sticker-banner {
+        height: clamp(160px, 18vw, 230px);
+      }
+    }
+
+    .sticker-frame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      will-change: opacity;
+    }
+
+    /* Frame 1 visible first 0.5s, then hidden */
+    .frame-1 {
+      animation: frame1Toggle 1s steps(1, end) infinite;
+    }
+
+    /* Frame 2 hidden first 0.5s, then visible */
+    .frame-2 {
+      animation: frame2Toggle 1s steps(1, end) infinite;
+    }
+
+    @keyframes frame1Toggle {
+      0%, 49.99% {
+        opacity: 1;
+      }
+      50%, 100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes frame2Toggle {
+      0%, 49.99% {
+        opacity: 0;
+      }
+      50%, 100% {
+        opacity: 1;
+      }
+    }
+
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .sticker-frame {
+        animation: none !important;
+      }
+      .frame-1 {
+        opacity: 1;
+      }
+      .frame-2 {
+        opacity: 0;
+      }
     }
 
     .hero-kicker {
@@ -270,201 +525,773 @@
     }
 
     .hero-title {
-      font-family: 'Awesome', system-ui, -apple-system, sans-serif;
-      font-weight: 500;
-      font-size: clamp(38px, 4vw, 48px);
+      position: relative;
+      display: inline-block;
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-weight: 600;
+      font-size: clamp(64px, 8vw, 120px);
       line-height: 1.08;
       letter-spacing: -0.04em;
-      max-width: 20ch;
+      text-align: center;
+      max-width: 30ch;
+      margin-bottom: 4px;
     }
 
-    .hero-title span {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 14px 6px 6px;
-      border-radius: 999px;
-      background: var(--pill-bg);
-      box-shadow: var(--shadow-md);
-      margin-bottom: 8px;
+    /* Top text – what the user sees */
+    .hero-title-main {
+      position: relative;
+      z-index: 2;
+      color: var(--text-main);
     }
 
-    .hero-title span svg {
-      width: 22px;
-      height: 22px;
-      flex-shrink: 0;
+    /* Bottom layer – thick white outline + shadow to mimic a sticker */
+    .hero-title-outline {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      color: transparent;
+      /* Thicker, rounder white halo */
+      -webkit-text-stroke: 26px #ffffff;
+      text-stroke: 26px #ffffff;
+      /* Sharp, low‑opacity shadow tucked just under the sticker */
+      filter:
+        drop-shadow(0 10px 4px rgba(15, 23, 42, 0.28))
+        drop-shadow(0 2px 0 rgba(255, 255, 255, 0.85));
+      pointer-events: none;
     }
 
     .hero-subtitle {
-      font-size: 16px;
+      font-family: "Manrope-Medium", system-ui, sans-serif;
+      font-size: clamp(18px, 2.2vw, 24px);
       color: var(--text-muted);
-      max-width: 42ch;
+      max-width: 50ch;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    /* Roles Slider */
+    .hero-roles {
+      position: relative;
+      font-family: "Manrope-Regular", system-ui, sans-serif;
+      font-size: clamp(16px, 1.8vw, 20px);
+      color: var(--text-muted);
+      text-align: center;
+      height: 1.5em;
+      line-height: 1.5;
+      margin: 8px 0 0 0;
+      overflow: hidden;
+    }
+
+    .hero-roles .role {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      animation: roleRotate 24s ease-in-out infinite;
+    }
+
+    .hero-roles .role:nth-child(1) { animation-delay: 0s; }
+    .hero-roles .role:nth-child(2) { animation-delay: 4s; }
+    .hero-roles .role:nth-child(3) { animation-delay: 8s; }
+    .hero-roles .role:nth-child(4) { animation-delay: 12s; }
+    .hero-roles .role:nth-child(5) { animation-delay: 16s; }
+    .hero-roles .role:nth-child(6) { animation-delay: 20s; }
+
+    @keyframes roleRotate {
+      0%, 14.5% { opacity: 1; }
+      16.66%, 100% { opacity: 0; }
+    }
+
+    /* Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-roles .role { animation: none !important; opacity: 0; }
+      .hero-roles .role:nth-child(1) { opacity: 1; }
     }
 
     .hero-meta {
       display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      margin-top: 8px;
-      font-size: 13px;
-      color: var(--text-muted);
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 28px;
+      width: 100%;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 20px;
+      overflow: hidden;
+      position: relative;
+      opacity: 0.85;
     }
 
-    .hero-pill {
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: var(--pill-bg);
+    .hero-meta::before,
+    .hero-meta::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-meta::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
+    }
+
+    .hero-meta::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+    }
+
+    .skills-marquee {
+      display: flex;
+      animation: scrollLeft 50s linear infinite;
+      white-space: nowrap;
+      will-change: transform;
+    }
+
+    .skills-marquee-track {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      gap: 2.25rem;
+      padding-inline: 1.5rem;
+    }
+
+    .skill-item,
+    .skill-sep {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-weight: 600;
+      font-size: clamp(19px, 2.4vw, 26px);
+      color: var(--text-main);
+    }
+
+    .skill-sep {
+      display: none;
+    }
+
+    @keyframes scrollLeft {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* SECTION DIVIDER */
+    .section-divider {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+      font-size: clamp(16px, 1.4vw, 20px);
+      font-weight: 400;
+      color: var(--text-main);
+      opacity: 0.45;
+      line-height: 1.6;
+      margin: clamp(12px, 2vw, 32px) auto;
+      user-select: none;
+      letter-spacing: 0.15em;
     }
 
     /* CASE STUDIES */
-    .section-label {
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 12px;
+    #case-studies {
+      width: 100%;
+      padding: 60px 0;
+      background: transparent;
+    }
+
+    .case-studies-container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .case-studies-heading {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+      text-align: center;
     }
 
     .case-gallery {
-      border-radius: var(--radius-xl);
-      background: linear-gradient(
-        135deg,
-        var(--card-bg-start),
-        var(--card-bg-end)
-      );
-      padding: 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 70px;
+      width: 100%;
     }
 
     .case-card {
-      padding: 18px 18px 20px;
-      border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top left, var(--case-card-bg-start) 0, var(--case-card-bg-end) 55%);
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
       box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      position: relative;
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    /* Removed box-shadow hover animation for performance */
+
+    .case-visual {
+      width: 100%;
+      aspect-ratio: 20 / 7;
+      overflow: hidden;
+      position: relative;
+      background: radial-gradient(circle at top left, var(--case-visual-bg-start), var(--case-visual-bg-end));
+      transform: translateZ(0);
+    }
+
+    .case-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    .case-content {
+      padding: 18px 24px;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      flex: 1 1 260px;
-      transition: transform var(--transition-fast),
-        box-shadow var(--transition-fast);
-    }
-
-    .case-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-xl);
-    }
-
-    .case-visual {
-      height: 120px;
-      border-radius: 16px;
-      background: radial-gradient(circle at top left, var(--case-visual-bg-start), var(--case-visual-bg-end));
-      margin-bottom: 8px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .case-visual::before {
-      content: "";
-      position: absolute;
-      inset: 18%;
-      border-radius: 18px;
-      background: linear-gradient(
-        120deg,
-        rgba(0, 113, 227, 0.7),
-        rgba(0, 0, 0, 0.9)
-      );
-      opacity: 0.18;
-      transform: translate3d(0, 0, 0);
-    }
-
-    .case-visual::after {
-      content: "";
-      position: absolute;
-      width: 220%;
-      height: 220%;
-      left: -60%;
-      top: 40%;
-      border-radius: 999px;
-      opacity: 0.6;
-    }
-
-    .case-meta {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 10px;
     }
 
     .case-title {
-      font-size: 16px;
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: 18px;
+      font-weight: 600;
       letter-spacing: -0.02em;
+      line-height: 1.3;
+      color: var(--text-main);
+      margin: 0;
     }
 
-    .case-desc-inline {
+    .case-desc {
       font-size: 13px;
       color: var(--text-muted);
-      white-space: nowrap;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .case-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      padding-top: 0;
+    }
+
+    .case-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .case-tag {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .case-study-label {
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 500;
+      opacity: 0;
+      transform: translateX(-8px) translateZ(0);
+      will-change: transform, opacity;
+      pointer-events: none;
+    }
+
+    /* Case-study specific accents */
+    .case-card--giveback .case-tag {
+      background: var(--case1-accent-soft);
+      color: var(--case1-accent);
+    }
+
+    .case-card--giveback .case-study-label {
+      color: var(--case1-accent);
+    }
+
+    .case-card--giveback .case-card-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .case-card--giveback .case-card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .case-card--aviary .case-tag {
+      background: var(--case2-accent-soft);
+      color: #8a8f98;
+    }
+
+    .case-card--aviary .case-study-label {
+      color: #8a8f98;
+    }
+
+    body.dark-mode .case-card--aviary .case-tag,
+    body.dark-mode .case-card--aviary .case-study-label {
+      color: #b8bcc5;
+    }
+
+    .case-card--aviary .case-card-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .case-card--aviary .case-card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .case-card--allan .case-tag {
+      background: var(--case3-accent-soft);
+      color: var(--case3-accent);
+    }
+
+    .case-card--allan .case-study-label {
+      color: var(--case3-accent);
+    }
+
+    .case-card--allan .case-card-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .case-card--allan .case-card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* RESPONSIVE CASE STUDIES */
+    @media (min-width: 768px) {
+      .case-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+      }
+      
+      .case-visual {
+        aspect-ratio: 16 / 7;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .case-gallery {
+        grid-template-columns: 1fr;
+        gap: 70px;
+      }
+      
+      .case-visual {
+        aspect-ratio: 20 / 7;
+      }
+    }
+
+    @media (max-width: 767px) {
+      #case-studies {
+        padding: 60px 0;
+      }
+      
+      .case-studies-container {
+        padding: 0 16px;
+      }
+      
+      .case-gallery {
+        gap: 40px;
+      }
+      
+      .case-visual {
+        aspect-ratio: 16 / 7;
+      }
+      
+      .case-content {
+        padding: 18px 20px;
+      }
+      
+      .case-title {
+        font-size: 18px;
+      }
+      
+      .case-desc {
+        font-size: 13px;
+      }
+      
+      .case-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+    /* DESIGN PROCESS */
+    #design-process {
+      width: 100%;
+      padding: 80px 0 56px;
+      background: transparent;
+    }
+
+    .design-process-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .process-heading {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .process-intro {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 60ch;
+      margin: 0 auto 48px;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .process-card {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.3s ease;
+    }
+
+    .process-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .process-step-number {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .process-card h3 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .process-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* TOOLS SECTION */
+    #tools {
+      width: 100%;
+      padding: 56px 0 16px;
+      background: transparent;
+    }
+
+    .tools-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .tools-heading {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .tools-intro {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 60ch;
+      margin: 0 auto 48px;
+    }
+
+    .tools-marquee-wrapper {
+      width: 100%;
       overflow: hidden;
-      text-overflow: ellipsis;
+      padding: 32px 0;
+      position: relative;
     }
 
-    .case-summary {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.4;
-      margin-top: 2px;
+    .tools-marquee-wrapper::before,
+    .tools-marquee-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 150px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .tools-marquee-wrapper::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
+    }
+
+    .tools-marquee-wrapper::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+    }
+
+    .tools-marquee {
+      display: flex;
+      gap: 48px;
+      animation: scrollLeft 30s linear infinite;
+      will-change: transform;
+    }
+
+    .tools-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Single tile: transparent so only the logo shows; no white square behind. */
+    .tool-icon {
+      width: 64px;
+      height: 64px;
+      padding: 8px;
+      box-sizing: border-box;
+      background: transparent;
+      border-radius: 16px;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .tool-icon:hover {
+      transform: translateY(-4px);
+    }
+
+    .tool-logo {
+      background: transparent;
+      box-shadow: none;
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
     }
 
     /* FOOTER */
     footer {
-      padding-top: 32px;
-      margin-top: 48px;
+      padding-top: 24px;
+      margin-top: 0;
     }
 
     .footer-inner {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
       display: flex;
-      align-items: stretch;
+      align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      min-height: 220px;
+      gap: 50px;
+      min-height: 300px;
     }
 
     .footer-text {
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      padding: 8px 0 8px;
+      gap: 20px;
+    }
+
+    .footer-divider {
+      font-size: clamp(16px, 1.6vw, 20px);
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      user-select: none;
     }
 
     .footer-heading {
-      font-size: clamp(30px, 3.2vw, 38px);
-      letter-spacing: -0.04em;
-      max-width: 8ch;
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(34px, 4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
     }
 
-    .footer-note {
-      font-size: 13px;
+    .footer-links {
+      display: flex;
+      gap: 36px;
+    }
+
+    .footer-link {
+      font-family: 'Manrope-Medium', system-ui, sans-serif;
+      font-size: clamp(16px, 1.5vw, 19px);
       color: var(--text-muted);
-      max-width: 26ch;
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .footer-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: #c92380;
+      transition: width var(--transition-fast);
+    }
+
+    .footer-link:hover::after {
+      width: 100%;
+    }
+
+    .footer-meta {
+      font-family: 'Manrope-Medium', system-ui, sans-serif;
+      font-size: clamp(13px, 1.1vw, 15px);
+      line-height: 1.7;
+      color: var(--text-muted);
+      opacity: 0.7;
+      margin-top: 8px;
     }
 
     .footer-image-wrap {
-      flex: 1.2;
+      flex: 0 0 auto;
       display: flex;
-      justify-content: flex-end;
       align-items: flex-end;
       overflow: visible;
     }
 
+    .footer-sticker-link {
+      display: block;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .footer-sticker-link:hover {
+      animation: footerStickerSwing 0.5s ease-in-out;
+    }
+
+    .footer-sticker-link:focus-visible {
+      outline: 2px solid var(--text-main);
+      outline-offset: 4px;
+      border-radius: 8px;
+    }
+
+    .footer-sticker-link.is-clicked .footer-image {
+      animation: footerStickerPop 0.35s ease-out;
+    }
+
+    @keyframes footerStickerSwing {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-4deg); }
+      50% { transform: rotate(2deg); }
+      75% { transform: rotate(-1deg); }
+    }
+
+    @keyframes footerStickerPop {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.08); }
+      70% { transform: scale(0.98); }
+      100% { transform: scale(1); }
+    }
+
     .footer-image {
       width: 100%;
-      max-width: 420px;
-      transform: translateX(8%);
+      max-width: 440px;
+      height: auto;
+      object-fit: contain;
       filter: drop-shadow(0 26px 60px rgba(0, 0, 0, 0.22));
+    }
+
+    /* FIXED FOOTER OVERLAY */
+    .fixed-footer-overlay {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      z-index: 999;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      mask-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.85) 30%,
+        rgba(0, 0, 0, 0.5) 60%,
+        rgba(0, 0, 0, 0.2) 80%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.85) 30%,
+        rgba(0, 0, 0, 0.5) 60%,
+        rgba(0, 0, 0, 0.2) 80%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      background: linear-gradient(
+        to top,
+        rgba(245, 245, 247, 0.15) 0%,
+        rgba(245, 245, 247, 0.1) 25%,
+        rgba(245, 245, 247, 0.06) 50%,
+        rgba(245, 245, 247, 0.03) 75%,
+        rgba(245, 245, 247, 0) 100%
+      );
+      pointer-events: none;
+      transition: background 0.3s ease;
+    }
+
+    body.dark-mode .fixed-footer-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(26, 26, 36, 0.15) 0%,
+        rgba(26, 26, 36, 0.1) 25%,
+        rgba(26, 26, 36, 0.06) 50%,
+        rgba(26, 26, 36, 0.03) 75%,
+        rgba(26, 26, 36, 0) 100%
+      );
     }
 
     /* RESPONSIVE */
@@ -487,72 +1314,101 @@
 
       .footer-inner {
         flex-direction: column;
-      }
-
-      .footer-image-wrap {
-        justify-content: flex-start;
+        align-items: flex-start;
       }
 
       .footer-image {
-        transform: translateX(0);
-        max-width: 100%;
+        max-width: 340px;
       }
     }
 
     @media (max-width: 600px) {
       .hero {
         padding-top: 4px;
+        gap: 6px;
       }
 
-      .hero-title span {
-        width: 100%;
+      .hero-roles {
+        font-size: 15px;
+        margin: 6px 0 0 0;
+      }
+
+      .sticker-banner {
+        --bannerScale: 1;
+        width: 92vw;
+        border-radius: 12px;
+        margin: 4px auto 0 auto;
       }
 
       .case-meta {
         flex-direction: column;
         align-items: flex-start;
       }
+
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ====== VIEW PILL (cursor-following hover label) ====== */
+    .view-pill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-family: 'Manrope-Medium', 'Manrope', system-ui, sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      background: rgba(255, 255, 255, 0.95);
+      color: #1a1a24;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      will-change: transform, opacity;
+    }
+
+    body.dark-mode .view-pill {
+      background: rgba(26, 26, 36, 0.95);
+      color: #f5f5f7;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .view-pill {
+        display: none !important;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Custom Cursor -->
+  <div class="custom-cursor">
+    <span class="cursor-label">View</span>
+  </div>
+
   <!-- NAVBAR -->
   <header class="nav" id="nav">
-    <div class="nav-left">
-      <a href="#top" class="logo" data-scroll>
-        <span class="logo-mark"></span>
-        <span class="logo-text">Studio</span>
-      </a>
-      <nav class="nav-link-group">
-        <a class="nav-link" href="#work" data-scroll>Work</a>
-        <a class="nav-link" href="#case-studies" data-scroll>Case Studies</a>
-        <a class="nav-link" href="#about" data-scroll>About</a>
+    <div class="nav__inner">
+      <div class="nav-left">
+        <a href="/" class="brand-logo-link">
+          <img src="img/avi brand logo.svg" alt="Avi logo" class="brand-logo" />
+        </a>
+      </div>
+      <nav class="nav-center nav-link-group">
+        <a class="nav-link" href="work.html">Work</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="playground.html" id="playground-link">Playground</a>
+        <a class="nav-link" href="https://docs.google.com/file/d/1FcgBev2uLHajdEr-AR8Y8zZowP1TgBxC9SiynNh5iCk/view" target="_blank" rel="noopener noreferrer">Resume</a>
       </nav>
-    </div>
-    <div class="nav-right">
-      <nav class="nav-link-group">
-        <a class="nav-link" href="#process" data-scroll>Process</a>
-        <a class="nav-link" href="#journal" data-scroll>Journal</a>
-        <a class="nav-link nav-link--primary" href="#contact" data-scroll>
+      <div class="nav-right">
+        <a class="nav-link nav-link--primary" href="mailto:lara.avilenne@gmail.com" aria-label="Email Avi">
           Contact
         </a>
-      </nav>
-      <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
-        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        <svg class="moon-icon" style="display: none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </button>
+      </div>
     </div>
   </header>
 
@@ -560,144 +1416,253 @@
     <div class="page">
       <!-- HERO -->
       <section class="hero" id="about">
-        <div class="hero-kicker">
-          <span class="hero-kicker-dot"></span>
-          Product design & case studies
-        </div>
         <h1 class="hero-title">
-          <span>
-           
-            Quiet, clear interfaces.
+          <span aria-hidden="true" class="hero-title-outline">
+            Hi, I'm Avilenne Lara!
           </span>
-          <br>
-          Built to feel obvious the first time you use them.
+          <span class="hero-title-main">
+            Hi, I'm Avilenne Lara!
+          </span>
         </h1>
+
         <p class="hero-subtitle">
-          A minimal case study layout that lets the work breathe. No noise, no
-          extras—only the decisions that matter and the stories behind them.
+          A UX designer driven by ☆ curiosity, ❀ care, and 𐙚 the belief that technology should feel human.
         </p>
+
+        <!-- Roles Slider -->
+        <div class="hero-roles" aria-live="polite">
+          <span class="role">UX Designer</span>
+          <span class="role">UI Designer</span>
+          <span class="role">UX Engineer</span>
+          <span class="role">Interaction Designer</span>
+          <span class="role">Product Designer</span>
+          <span class="role">Visual Designer</span>
+        </div>
+
+        <!-- Animated Sticker Banner -->
+        <div class="sticker-banner" aria-hidden="true">
+          <img src="img/homepage/Banner%20sticker%201.png" alt="" class="sticker-frame frame-1" />
+          <img src="img/homepage/Banner%20sticker%202.png" alt="" class="sticker-frame frame-2" />
+        </div>
+
+        <!-- Skills / titles marquee (directly under banner) -->
         <div class="hero-meta">
-          <span class="hero-pill">End-to-end product thinking</span>
-          <span class="hero-pill">Interaction, visuals & systems</span>
-          <span class="hero-pill">Web · Product · Brand</span>
+          <div class="skills-marquee" aria-hidden="true">
+            <div class="skills-marquee-track">
+              <span class="skill-item">UX Design</span>
+              <span class="skill-item">UI Design</span>
+              <span class="skill-item">Interaction Design</span>
+              <span class="skill-item">User Research</span>
+              <span class="skill-item">Prototyping</span>
+              <span class="skill-item">Visual Design</span>
+              <span class="skill-item">Design Systems</span>
+              <span class="skill-item">Figma</span>
+              <span class="skill-item">Service Design</span>
+              <span class="skill-item">Information Architecture</span>
+              <span class="skill-item">Wireframing</span>
+              <span class="skill-item">Usability Testing</span>
+              <span class="skill-item">Brand Design</span>
+              <span class="skill-item">Product Thinking</span>
+            </div>
+            <div class="skills-marquee-track">
+              <span class="skill-item">UX Design</span>
+              <span class="skill-item">UI Design</span>
+              <span class="skill-item">Interaction Design</span>
+              <span class="skill-item">User Research</span>
+              <span class="skill-item">Prototyping</span>
+              <span class="skill-item">Visual Design</span>
+              <span class="skill-item">Design Systems</span>
+              <span class="skill-item">Figma</span>
+              <span class="skill-item">Service Design</span>
+              <span class="skill-item">Information Architecture</span>
+              <span class="skill-item">Wireframing</span>
+              <span class="skill-item">Usability Testing</span>
+              <span class="skill-item">Brand Design</span>
+              <span class="skill-item">Product Thinking</span>
+            </div>
+          </div>
         </div>
       </section>
+    </div>
+  </main>
 
-      <!-- CASE STUDIES -->
-      <section id="case-studies">
-        <p class="section-label">Case Studies Gallery</p>
-        <div class="case-gallery">
-          <!-- Case 1 -->
-          <article class="case-card">
-            <div class="case-visual" aria-hidden="true"></div>
-            <div class="case-meta">
-              <h3 class="case-title">BriefTutor workspace</h3>
-              <p class="case-desc-inline">
-                Assignment clarity for overwhelmed students
-              </p>
-            </div>
-            <p class="case-summary">
-              A visual assignment manager that turns dense briefs into a calm
-              flow of steps. Designed to reduce cognitive load and make every
-              task feel finishable.
-            </p>
-          </article>
+  <!-- Divider between roles slider & Case Studies (homepage) -->
+  <div class="section-divider" aria-hidden="true">• . ݁₊ ⊹ . ݁꒰ঌ·✦·໒꒱ ݁ . ⊹ ₊ ݁. •</div>
 
-          <!-- Case 2 -->
-          <article class="case-card">
-            <div class="case-visual" aria-hidden="true"></div>
-            <div class="case-meta">
-              <h3 class="case-title">Betbot insights</h3>
-              <p class="case-desc-inline">
-                Frictionless stats in one clean surface
-              </p>
-            </div>
-            <p class="case-summary">
-              A single page that pulls lines, odds, and movement into a
-              structured comparison view. No dashboards, just focused,
-              glanceable decisions.
-            </p>
-          </article>
+  <!-- CASE STUDIES -->
+  <section id="case-studies">
+    <div class="case-studies-container">
+      <h2 class="case-studies-heading">Case Studies Gallery</h2>
+      <div class="case-gallery">
+        <!-- Case 1 (PIH) -->
+        <article class="case-card case-card--giveback" data-case-study="case-study-1.html">
+          <a class="case-card-link case-card-link--giveback" href="case-study-1.html">
+            <img src="img/homepage/PIH%20case%20study%20card.png" alt="Partners In Health donation kiosk case study card" class="case-card-image case-card-image--giveback" />
+          </a>
+        </article>
 
-          <!-- Case 3 -->
-          <article class="case-card">
-            <div class="case-visual" aria-hidden="true"></div>
-            <div class="case-meta">
-              <h3 class="case-title">LaunchExit marketplace</h3>
-              <p class="case-desc-inline">
-                Quiet deal room for bootstrapped SaaS
-              </p>
-            </div>
-            <p class="case-summary">
-              A small acquisition marketplace built around trust badges, simple
-              cards, and a reading experience that feels closer to a document
-              than a feed.
-            </p>
-          </article>
+        <!-- Case 2 -->
+        <article class="case-card case-card--aviary" data-case-study="case-study-2.html">
+          <a class="case-card-link case-card-link--aviary" href="case-study-2.html">
+            <img src="img/homepage/The%20aviary%20case%20study%20card.png" alt="The Aviary case study card" class="case-card-image case-card-image--aviary" />
+          </a>
+        </article>
+
+        <!-- Case 3 (Allen Gardens) -->
+        <article class="case-card case-card--allan" data-case-study="case-study-3.html">
+          <a class="case-card-link case-card-link--allan" href="case-study-3.html">
+            <img src="img/homepage/Allen%20gardens%20case%20study%20card.png" alt="Allen Gardens wayfinding case study card" class="case-card-image case-card-image--allan" />
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider" aria-hidden="true">ִֶָ. ..𓂃 ࣪ ִֶָ🪽་༘࿐༊·˚.</div>
+
+  <!-- DESIGN PROCESS -->
+  <section id="design-process">
+    <div class="design-process-container">
+      <h2 class="process-heading">My Design Process</h2>
+      <p class="process-intro">
+        my design process is creating a product journey where both the user's wants and needs for functionality are perfectly balanced through both broad exploration and focused execution.
+      </p>
+      <div class="process-grid">
+        <div class="process-card">
+          <div class="process-step-number">1</div>
+          <h3>Explore</h3>
+          <p>
+            My initial goal is to gather as much information and resources about the project as possible. I then use this information to reach out to people to begin working together to create clear expectations for the end product. In addition, I will document any current processes that may contribute to creating the new product.
+          </p>
         </div>
-      </section>
+        <div class="process-card">
+          <div class="process-step-number">2</div>
+          <h3>Generate Ideas</h3>
+          <p>
+            I create quick and simple sketches of ideas and wireframes of potential user interfaces. I experiment with interested designs to discover which designs will best match the needs of the user. During this stage, my focus is on learning rather than creating the best product.
+          </p>
+        </div>
+        <div class="process-card">
+          <div class="process-step-number">3</div>
+          <h3>Design</h3>
+          <p>
+            When I have established a direction for the project, I design a usable interface by following the established visual hierarchy, ensuring accessibility for all users, and maintaining consistency between various screens within the design. If an element looks great but has a negative effect on usability, I will make adjustments.
+          </p>
+        </div>
+        <div class="process-card">
+          <div class="process-step-number">4</div>
+          <h3>Evaluate</h3>
+          <p>
+            After I have completed the design, I will have it reviewed and tested to ensure usability by others besides myself. I will perform multiple iterations of the design based on user testing results so that the final product matches what the end user requires.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <!-- Dummy anchors to satisfy nav links (kept visually minimal) -->
-      <section id="work" style="height: 1px;"></section>
-      <section id="process" style="height: 1px;"></section>
-      <section id="journal" style="height: 1px;"></section>
-      <section id="contact" style="height: 1px;"></section>
+  <div class="section-divider" aria-hidden="true">°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･</div>
 
-      <!-- FOOTER -->
-      <footer>
+  <!-- TOOLS -->
+  <section id="tools">
+    <div class="tools-container">
+      <h2 class="tools-heading">Tools that power my every day</h2>
+      <p class="tools-intro">
+        The right tools make all the difference. Here's what I use to bring ideas to life.
+      </p>
+      <div class="tools-marquee-wrapper">
+        <div class="tools-marquee">
+          <div class="tool-icon" title="Figma">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/figma.png" alt="Figma logo" />
+          </div>
+          <div class="tool-icon" title="Adobe XD">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/adobe%20xd.png" alt="Adobe XD logo" />
+          </div>
+          <div class="tool-icon" title="Clip Studio Paint">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/Clipstudiopaint.png" alt="Clip Studio Paint logo" />
+          </div>
+          <div class="tool-icon" title="SketchUp">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/sketch%20up.png" alt="SketchUp logo" />
+          </div>
+          <div class="tool-icon" title="Adobe Illustrator">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/adobe%20illustrator.png" alt="Adobe Illustrator logo" />
+          </div>
+          <div class="tool-icon" title="Adobe Photoshop">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/adobe%20photoshop.png" alt="Adobe Photoshop logo" />
+          </div>
+          <div class="tool-icon" title="Adobe After Effects">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/adobe%20after%20effects.png" alt="Adobe After Effects logo" />
+          </div>
+          <div class="tool-icon" title="VS Code">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/vs%20code.png" alt="VS Code logo" />
+          </div>
+          <div class="tool-icon" title="Procreate">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/procreate.png" alt="Procreate logo" />
+          </div>
+          <div class="tool-icon" title="GitHub">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/github.png" alt="GitHub logo" />
+          </div>
+          <div class="tool-icon" title="Antigravity">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/antigravity.png" alt="Antigravity logo" />
+          </div>
+          <div class="tool-icon" title="Gemini CLI">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/gemini%20cli.png" alt="Gemini CLI logo" />
+          </div>
+          <div class="tool-icon" title="Obsidian">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/obsidian.png" alt="Obsidian logo" />
+          </div>
+          <!-- Duplicate for seamless loop -->
+          <div class="tool-icon" title="Figma">
+            <img class="tool-logo" src="img/homepage/design%20tools%20icons/figma.png" alt="Figma logo" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page">
+    <!-- Dummy anchors to satisfy nav links (kept visually minimal) -->
+    <section id="work" style="height: 1px;"></section>
+    <section id="process" style="height: 1px;"></section>
+    <section id="journal" style="height: 1px;"></section>
+    <section id="contact" style="height: 1px;"></section>
+
+    <!-- FOOTER -->
+    <footer>
         <div class="footer-inner">
           <div class="footer-text">
-            <h2 class="footer-heading">Let’s work together.</h2>
-            <p class="footer-note">
-              Send a brief, a problem, or a half-finished idea. The first step
-              is a simple outline of what needs to feel better.
-            </p>
+            <p class="footer-divider" aria-hidden="true">♡.•♬✧⁽⁽ଘ( ˊᵕˋ )ଓ⁾⁾*+:•*∴✰</p>
+            <h2 class="footer-heading">Nice to see you here!</h2>
+            <div class="footer-links">
+              <a class="footer-link" href="mailto:lara.avilenne@gmail.com">Email ↗</a>
+              <a class="footer-link" href="https://www.linkedin.com/in/avilennelara" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            </div>
+            <p class="footer-meta">Made with luv © 2026 Avilenne Lara 🎀<br>This website is best viewed on desktop.</p>
           </div>
           <div class="footer-image-wrap">
-            <!-- big image, allowed to overflow -->
-            <img
-              class="footer-image"
-              alt="Abstract light panel mockup"
-              src="data:image/svg+xml;utf8,
-                <svg xmlns='http://www.w3.org/2000/svg' width='900' height='600' viewBox='0 0 900 600'>
-                  <defs>
-                    <linearGradient id='bg' x1='0%' y1='0%' x2='100%' y2='100%'>
-                      <stop offset='0%' stop-color='%23f5f5f7'/>
-                      <stop offset='100%' stop-color='%23e4e4ea'/>
-                    </linearGradient>
-                    <linearGradient id='panel' x1='0%' y1='0%' x2='100%' y2='100%'>
-                      <stop offset='0%' stop-color='%23ffffff'/>
-                      <stop offset='100%' stop-color='%23f1f6ff'/>
-                    </linearGradient>
-                  </defs>
-                  <rect width='900' height='600' fill='url(%23bg)' rx='80'/>
-                  <g transform='translate(140,90)'>
-                    <rect x='0' y='0' width='620' height='380' rx='48' fill='url(%23panel)' />
-                    <rect x='46' y='64' width='320' height='7' rx='3.5' fill='%23d0d3dd' opacity='0.8'/>
-                    <rect x='46' y='102' width='260' height='7' rx='3.5' fill='%23d0d3dd' opacity='0.66'/>
-                    <rect x='46' y='140' width='200' height='7' rx='3.5' fill='%23d0d3dd' opacity='0.54'/>
-                    <rect x='46' y='204' width='210' height='18' rx='9' fill='%230071e3' opacity='0.18'/>
-                    <rect x='46' y='244' width='160' height='18' rx='9' fill='%230071e3' opacity='0.10'/>
-                    <rect x='380' y='64' width='160' height='120' rx='24' fill='%23ecefff'/>
-                    <circle cx='460' cy='124' r='40' fill='%23ffffff'/>
-                    <circle cx='460' cy='124' r='20' fill='%230071e3' opacity='0.85'/>
-                  </g>
-                </svg>"
-            />
+            <a class="footer-sticker-link" href="mailto:lara.avilenne@gmail.com" aria-label="Email me to connect">
+              <img class="footer-image" src="img/homepage/avi-lets-connect-sticker.png" alt="Let's connect sticker" />
+            </a>
           </div>
         </div>
       </footer>
     </div>
-  </main>
+
+  <!-- Fixed Footer Overlay -->
+  <div class="fixed-footer-overlay"></div>
 
   <!-- GSAP & Plugins -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Universal Page Transitions -->
+  <script src="js/page-transitions.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
   
   <script>
     // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    
+    // Store ScrollTrigger instances to prevent recreation
+    const storedScrollTriggers = new Map();
 
     // Smooth scroll for in-page nav links with GSAP
     document.querySelectorAll("[data-scroll]").forEach(function (link) {
@@ -716,13 +1681,31 @@
       });
     });
 
-    // Navbar shadow on scroll with GSAP
+    // Navbar floating pill animation
     const nav = document.getElementById("nav");
-    ScrollTrigger.create({
-      start: "top -10",
-      onEnter: () => nav.classList.add("nav--scrolled"),
-      onLeaveBack: () => nav.classList.remove("nav--scrolled")
+    
+    function handleNavbarScroll() {
+      if (window.scrollY > 80) {
+        nav.classList.add("nav--floating");
+      } else {
+        nav.classList.remove("nav--floating");
+      }
+    }
+    
+    // Throttle scroll events for better performance
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleNavbarScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
     });
+    
+    // Check initial scroll position
+    handleNavbarScroll();
 
     // ===== HERO ANIMATIONS =====
     
@@ -735,22 +1718,13 @@
       delay: 0.2
     });
 
-    // Hero title - split animation
+    // Hero title (sticker heading) fade in
     gsap.from(".hero-title", {
       opacity: 0,
-      y: 50,
-      duration: 1.2,
+      y: 24,
+      duration: 0.9,
       ease: "power3.out",
-      delay: 0.4
-    });
-
-    // Hero title span (with icon) - scale in
-    gsap.from(".hero-title span", {
-      scale: 0.8,
-      opacity: 0,
-      duration: 0.8,
-      ease: "back.out(1.7)",
-      delay: 0.6
+      delay: 0.35
     });
 
     // Hero subtitle fade up
@@ -762,19 +1736,198 @@
       delay: 0.8
     });
 
-    // Hero pills stagger animation
-    gsap.from(".hero-pill", {
+    // Sticker banner fades in after subtitle
+    gsap.from(".sticker-banner", {
+      opacity: 0,
+      y: 40,
+      duration: 1.1,
+      ease: "power3.out",
+      delay: 1.4
+    });
+
+    // Skills marquee fades in after banner
+    gsap.from(".hero-meta", {
       opacity: 0,
       y: 20,
       duration: 0.8,
-      stagger: 0.1,
       ease: "power3.out",
-      delay: 1
+      delay: 1.9
     });
+
+    // Skills marquee fade in on scroll (hero skills slider)
+    if (!storedScrollTriggers.has('skills-marquee')) {
+      const skillsTrigger = gsap.from(".skills-marquee", {
+        scrollTrigger: {
+          trigger: ".hero-meta",
+          start: "top 80%",
+          toggleActions: "play none none none",
+          once: true
+        },
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out"
+      });
+      storedScrollTriggers.set('skills-marquee', skillsTrigger);
+    }
 
     // ===== SCROLL-TRIGGERED ANIMATIONS =====
 
-    // (Case studies: all GSAP animations removed per request)
+    // Case study cards individual reveal animation - optimized
+    // Each card animates independently when it enters the viewport
+    document.querySelectorAll(".case-card").forEach((card, index) => {
+      const triggerId = `case-card-${index}`;
+      if (!storedScrollTriggers.has(triggerId)) {
+        const trigger = gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          toggleActions: "play none none none",
+          once: true
+        },
+          y: 30,
+          duration: 0.6,
+          ease: "power2.out"
+      });
+        storedScrollTriggers.set(triggerId, trigger);
+      }
+    });
+
+    // Unified hover for case cards — subtle scale, no bounce
+    document.querySelectorAll(".case-card").forEach(card => {
+      function hoverIn()  { gsap.to(card, { scale: 1.02, duration: 0.35, ease: "power2.out", overwrite: true }); }
+      function hoverOut() { gsap.to(card, { scale: 1, duration: 0.35, ease: "power2.out", overwrite: true }); }
+
+      card.addEventListener("mouseenter", hoverIn);
+      card.addEventListener("mouseleave", hoverOut);
+
+      var link = card.querySelector("a");
+      if (link) {
+        link.addEventListener("focus", hoverIn);
+        link.addEventListener("blur", hoverOut);
+      }
+    });
+
+    // Case Studies heading animation - only create once
+    if (!storedScrollTriggers.has('case-studies-heading')) {
+      const headingTrigger = gsap.from(".case-studies-heading", {
+      scrollTrigger: {
+        trigger: "#case-studies",
+        start: "top 80%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+        y: 20,
+        duration: 0.6,
+        ease: "power2.out"
+    });
+      storedScrollTriggers.set('case-studies-heading', headingTrigger);
+    }
+
+    // Design Process section animation - optimized, only create once
+    if (!storedScrollTriggers.has('process-heading')) {
+      const processHeadingTrigger = gsap.from(".process-heading", {
+      scrollTrigger: {
+        trigger: "#design-process",
+        start: "top 80%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+        y: 20,
+        duration: 0.6,
+        ease: "power2.out"
+    });
+      storedScrollTriggers.set('process-heading', processHeadingTrigger);
+    }
+
+    if (!storedScrollTriggers.has('process-intro')) {
+      const processIntroTrigger = gsap.from(".process-intro", {
+      scrollTrigger: {
+        trigger: "#design-process",
+        start: "top 80%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+        y: 15,
+        duration: 0.6,
+        delay: 0.1,
+        ease: "power2.out"
+    });
+      storedScrollTriggers.set('process-intro', processIntroTrigger);
+    }
+
+    if (!storedScrollTriggers.has('process-cards')) {
+      const processCardsTrigger = gsap.from(".process-card", {
+      scrollTrigger: {
+        trigger: "#design-process",
+        start: "top 75%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+        y: 25,
+        stagger: 0.1,
+        duration: 0.6,
+        delay: 0.2,
+        ease: "power2.out"
+    });
+      storedScrollTriggers.set('process-cards', processCardsTrigger);
+    }
+
+    // Tools section animation - optimized, only create once
+    if (!storedScrollTriggers.has('tools-heading')) {
+      const toolsHeadingTrigger = gsap.from(".tools-heading", {
+      scrollTrigger: {
+        trigger: "#tools",
+        start: "top 80%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+        y: 20,
+        duration: 0.6,
+        ease: "power2.out"
+    });
+      storedScrollTriggers.set('tools-heading', toolsHeadingTrigger);
+    }
+
+    if (!storedScrollTriggers.has('tools-intro')) {
+      const toolsIntroTrigger = gsap.from(".tools-intro", {
+      scrollTrigger: {
+        trigger: "#tools",
+        start: "top 80%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+        y: 15,
+        duration: 0.6,
+        delay: 0.1,
+        ease: "power2.out"
+    });
+      storedScrollTriggers.set('tools-intro', toolsIntroTrigger);
+    }
+
+    if (!storedScrollTriggers.has('tools-marquee')) {
+      const toolsMarqueeTrigger = gsap.from(".tools-marquee-wrapper", {
+      scrollTrigger: {
+        trigger: "#tools",
+        start: "top 75%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+        y: 20,
+        duration: 0.6,
+        delay: 0.2,
+        ease: "power2.out"
+    });
+      storedScrollTriggers.set('tools-marquee', toolsMarqueeTrigger);
+    }
 
     // ===== FOOTER ANIMATIONS =====
 
@@ -792,7 +1945,7 @@
     });
 
     // Footer note
-    gsap.from(".footer-note", {
+    gsap.from(".footer-text", {
       scrollTrigger: {
         trigger: "footer",
         start: "top 80%",
@@ -820,68 +1973,44 @@
       ease: "power3.out"
     });
 
-    // ===== INTERACTIVE HOVER ANIMATIONS =====
+    // Footer sticker click pop (remove .is-clicked after animation)
+    const footerStickerLink = document.querySelector(".footer-sticker-link");
+    if (footerStickerLink) {
+      footerStickerLink.addEventListener("click", function () {
+        this.classList.add("is-clicked");
+        setTimeout(() => this.classList.remove("is-clicked"), 350);
+      });
+    }
 
-    // Logo hover
+    // ===== INTERACTIVE HOVER ANIMATIONS (OPTIMIZED) =====
+
+    // Logo hover - optimized with overwrite
     const logo = document.querySelector(".logo");
-    logo.addEventListener("mouseenter", () => {
-      gsap.to(".logo-mark", {
-        rotation: 360,
-        scale: 1.1,
-        duration: 0.6,
-        ease: "back.out(1.7)"
-      });
-    });
-    logo.addEventListener("mouseleave", () => {
-      gsap.to(".logo-mark", {
-        rotation: 0,
-        scale: 1,
-        duration: 0.4,
-        ease: "power2.out"
-      });
-    });
-
-    // (Case card hover GSAP removed; cards now use pure CSS hover only)
-
-    // Nav links hover - underline animation
-    document.querySelectorAll(".nav-link").forEach(link => {
-      link.addEventListener("mouseenter", () => {
-        gsap.to(link, {
-          color: "#0071e3",
-          duration: 0.3,
-          ease: "power2.out"
+    if (logo) {
+      logo.addEventListener("mouseenter", () => {
+        gsap.to(".logo-mark", {
+          rotation: 360,
+          scale: 1.1,
+          duration: 0.5,
+          ease: "power2.out",
+          overwrite: true
         });
       });
-      
-      link.addEventListener("mouseleave", () => {
-        gsap.to(link, {
-          color: "#7a7a80",
-          duration: 0.3,
-          ease: "power2.out"
-        });
-      });
-    });
-
-    // Hero pills hover
-    document.querySelectorAll(".hero-pill").forEach(pill => {
-      pill.addEventListener("mouseenter", () => {
-        gsap.to(pill, {
-          scale: 1.05,
-          y: -3,
-          duration: 0.3,
-          ease: "back.out(1.7)"
-        });
-      });
-      
-      pill.addEventListener("mouseleave", () => {
-        gsap.to(pill, {
+      logo.addEventListener("mouseleave", () => {
+        gsap.to(".logo-mark", {
+          rotation: 0,
           scale: 1,
-          y: 0,
           duration: 0.3,
-          ease: "power2.out"
+          ease: "power2.out",
+          overwrite: true
         });
       });
-    });
+    }
+
+    // Nav links hover - optimized with CSS transitions (no GSAP needed)
+    // Removed GSAP animations for nav links as CSS handles this more efficiently
+
+    // Hero pills hover removed - these don't exist anymore (replaced by marquee)
 
     // ===== CONTINUOUS ANIMATIONS =====
 
@@ -895,51 +2024,60 @@
       ease: "power1.inOut"
     });
 
-    // Parallax effect for page on scroll
-    gsap.to(".page", {
-      scrollTrigger: {
-        trigger: "body",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1
-      },
-      y: -50,
-      ease: "none"
-    });
+    // Parallax effect removed for performance - was causing lag
 
-    // ===== DARK MODE TOGGLE =====
+    // ===== CUSTOM CURSOR =====
     
-    const darkModeToggle = document.getElementById("darkModeToggle");
-    const sunIcon = darkModeToggle.querySelector(".sun-icon");
-    const moonIcon = darkModeToggle.querySelector(".moon-icon");
+    const cursor = document.querySelector('.custom-cursor');
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
     
-    // Check for saved dark mode preference
-    const isDarkMode = localStorage.getItem("darkMode") === "true";
-    if (isDarkMode) {
-      document.body.classList.add("dark-mode");
-      sunIcon.style.display = "none";
-      moonIcon.style.display = "block";
-    }
-    
-    // Toggle dark mode
-    darkModeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-      const isNowDark = document.body.classList.contains("dark-mode");
-      
-      // Toggle icons
-      if (isNowDark) {
-        sunIcon.style.display = "none";
-        moonIcon.style.display = "block";
-      } else {
-        sunIcon.style.display = "block";
-        moonIcon.style.display = "none";
-      }
-      
-      // Save preference
-      localStorage.setItem("darkMode", isNowDark);
+    // Track mouse position
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     });
     
+    // Smooth cursor follow with GSAP - optimized with requestAnimationFrame
+    let rafId = null;
+    function updateCursor() {
+      const dx = mouseX - cursorX;
+      const dy = mouseY - cursorY;
+      
+      cursorX += dx * 0.2;
+      cursorY += dy * 0.2;
+      
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      
+      rafId = requestAnimationFrame(updateCursor);
+    }
+    updateCursor();
+    
+    // Detect hovering over interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .case-card, .nav-link, .hero-pill, .case-study-link');
+    
+    interactiveElements.forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        document.body.classList.add('hovering-link');
+      });
+      
+      element.addEventListener('mouseleave', () => {
+        document.body.classList.remove('hovering-link');
+      });
+    });
+    
+    // View pill for case cards is now handled by js/hover-cards.js
+    
+    // ===== PAGE TRANSITIONS =====
+    
+    // Centralized transition helper - performant and smooth
+    // Page transitions are now handled by js/page-transitions.js
+
     console.log("🎨 GSAP Animations Loaded!");
   </script>
+  <script src="js/hover-cards.js"></script>
 </body>
 </html>

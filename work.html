@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Featured Projects - Avilenne Lara</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="img/avi brand logo.svg" />
+  <style>
+    @font-face {
+      font-family: 'Awesome';
+      src: url('fonts/awesome-light.otf') format('opentype');
+      font-weight: 300;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Awesome';
+      src: url('fonts/awesome-medium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Freight Text Pro Semibold';
+      src: url('fonts/fonnts.com-Freight-Text-Pro-Semibold-.otf') format('opentype');
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Manrope-Medium';
+      src: url('fonts/Manrope-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    :root {
+      --bg: #f5f5f7;
+      --bg-elevated: #ffffff;
+      --bg-gradient-start: #ffffff;
+      --bg-gradient-end: #f5f5f7;
+      --border-subtle: rgba(0, 0, 0, 0);
+      --text-main: #2f332f;
+      --text-muted: #7a7a80;
+      --accent: #0071e3;
+      --accent-soft: rgba(0, 113, 227, 0.08);
+      --nav-bg: rgba(245, 245, 247, 0.55);
+      --nav-bg-scrolled: rgba(245, 245, 247, 0.75);
+      --card-bg-start: rgba(255, 255, 255, 0.95);
+      --card-bg-end: rgba(250, 250, 252, 0.98);
+      --case-card-bg-start: #ffffff;
+      --case-card-bg-end: #f7f7fa;
+      --case-visual-bg-start: #e5f1ff;
+      --case-visual-bg-end: #f5f5f7;
+      --logo-bg: rgba(255, 255, 255, 0.9);
+      --pill-bg: rgba(230, 230, 235, 0.9);
+      --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.7), 0 6px 12px rgba(0, 0, 0, 0.12);
+      --shadow-md: 0 14px 40px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.03);
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --transition-fast: 180ms ease-out;
+      --case1-accent: #E57714;
+      --case1-accent-soft: rgba(229, 119, 20, 0.15);
+      --case2-accent: #c7cdd6;
+      --case2-accent-soft: rgba(199, 205, 214, 0.3);
+      --case3-accent: #e67e80;
+      --case3-accent-soft: rgba(230, 126, 128, 0.15);
+    }
+
+    body.dark-mode {
+      --bg: #0a0a0f;
+      --bg-elevated: #1a1a24;
+      --bg-gradient-start: #1a1a24;
+      --bg-gradient-end: #0a0a0f;
+      --text-main: #e8e8ed;
+      --text-muted: #9a9aa5;
+      --accent: #4a9eff;
+      --accent-soft: rgba(74, 158, 255, 0.15);
+      --nav-bg: rgba(10, 10, 15, 0.55);
+      --nav-bg-scrolled: rgba(10, 10, 15, 0.75);
+      --card-bg-start: rgba(26, 26, 36, 0.95);
+      --card-bg-end: rgba(20, 20, 30, 0.98);
+      --case-card-bg-start: #1a1a24;
+      --case-card-bg-end: #12121a;
+      --case-visual-bg-start: #1e2a3f;
+      --case-visual-bg-end: #0f1419;
+      --logo-bg: rgba(26, 26, 36, 0.9);
+      --pill-bg: rgba(26, 26, 36, 0.9);
+      --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 6px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 14px 40px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      cursor: none !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Manrope-Medium", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at top, var(--bg-gradient-start) 0, var(--bg-gradient-end) 52%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      padding-top: 72px;
+      padding-bottom: 0;
+      transition: background 0.3s ease, color 0.3s ease;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Paper texture overlay - scrolls with content, crisp and continuous */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('img/paper.png');
+      background-repeat: repeat;
+      background-size: 500px 593px;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body.dark-mode::before {
+      opacity: 0.18;
+    }
+
+    /* Ensure all direct children of body are above the texture */
+    body > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    body.transitioning {
+      overflow: hidden;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-weight: 600;
+    }
+
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 2147483647;
+      transform: translate(-50%, -50%);
+      background: #2f332f;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+      will-change: transform;
+      opacity: 1;
+      display: block;
+      visibility: visible;
+    }
+
+    body.dark-mode .custom-cursor {
+      background: #e8e8ed;
+      border: 2px solid #0a0a0f;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    body.hovering-link .custom-cursor {
+      transform: translate(-50%, -50%) scale(1.3);
+    }
+
+    .cursor-label {
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: 10px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-family: 'Manrope-Medium', 'Manrope', system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+      background: rgba(255, 255, 255, 0.95);
+      color: #1a1a24;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    body.cursor-view-mode .custom-cursor {
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    body.cursor-view-mode .cursor-label {
+      opacity: 1;
+    }
+
+    body.dark-mode.cursor-view-mode .custom-cursor {
+      background: rgba(26, 26, 36, 0.95);
+      border: 2px solid rgba(26, 26, 36, 0.95);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode .cursor-label {
+      background: rgba(26, 26, 36, 0.95);
+      color: #f5f5f7;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .cursor-label {
+        display: none !important;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .work-hero {
+      padding: clamp(80px, 12vw, 160px) 0 60px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .work-hero h1 {
+      font-size: clamp(48px, 6vw, 76px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      color: var(--text-main);
+    }
+
+    .work-hero p {
+      max-width: 60ch;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 24px 48px;
+      pointer-events: none;
+      transition: all 0.35s ease;
+    }
+
+    .nav__inner {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-bottom: 16px;
+      pointer-events: auto;
+      background: transparent;
+      transition: all 0.35s ease;
+    }
+
+    body.dark-mode .nav__inner {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .nav.nav--floating {
+      top: 0;
+    }
+
+    .nav.nav--floating .nav__inner {
+      max-width: 760px;
+      padding: 10px 24px;
+      border-bottom: none;
+      border-radius: 999px;
+      background: rgba(230, 230, 235, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+    }
+
+    body.dark-mode .nav.nav--floating .nav__inner {
+      background: rgba(20, 20, 25, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      transition: gap 0.25s ease;
+    }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      transition: gap 0.25s ease;
+    }
+
+    .nav.nav--floating .nav-left,
+    .nav.nav--floating .nav-right {
+      gap: 16px;
+    }
+
+    .nav.nav--floating .nav-center {
+      gap: 16px;
+    }
+
+    .nav.nav--floating .nav-left {
+      padding-right: 20px;
+      margin-right: 16px;
+      border-right: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    body.dark-mode .nav.nav--floating .nav-left {
+      border-right-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .brand-logo-link {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .brand-logo {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-link-group {
+      display: flex;
+      gap: 24px;
+      font-size: 15px;
+      color: var(--text-main);
+      opacity: 1;
+    }
+
+    .nav-link {
+      font-family: "Manrope-Medium", system-ui, sans-serif;
+      position: relative;
+      padding: 4px 0;
+      cursor: pointer;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2.5px;
+      border-radius: 999px;
+      background: #c92380;
+      transition: width var(--transition-fast);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-link.nav-link--primary {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #c92380;
+      color: var(--bg-elevated);
+      font-size: 14px;
+      transition: opacity var(--transition-fast), background var(--transition-fast);
+    }
+
+    .nav-link.nav-link--primary:hover {
+      opacity: 0.85;
+      background: #b01e6f;
+    }
+
+    .nav-link.nav-link--primary::after {
+      display: none;
+    }
+
+    /* SECTION DIVIDER */
+    .section-divider {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+      font-size: clamp(16px, 1.4vw, 20px);
+      font-weight: 400;
+      color: var(--text-main);
+      opacity: 0.45;
+      line-height: 1.6;
+      margin: clamp(12px, 2vw, 32px) auto;
+      user-select: none;
+      letter-spacing: 0.15em;
+    }
+
+    #case-studies {
+      width: 100%;
+      padding: 80px 0;
+      background: transparent;
+    }
+
+    .case-studies-container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .case-studies-heading {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .case-gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 70px;
+      width: 100%;
+    }
+
+    /* Case study cards: same structure and sizing as homepage */
+    .case-card {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      position: relative;
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    .case-card--giveback .case-card-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .case-card--giveback .case-card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .case-card--aviary .case-card-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .case-card--aviary .case-card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .case-card--allan .case-card-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .case-card--allan .case-card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (min-width: 768px) {
+      .case-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .case-gallery {
+        grid-template-columns: 1fr;
+        gap: 70px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      #case-studies {
+        padding: 60px 0;
+      }
+
+      .case-studies-container {
+        padding: 0 16px;
+      }
+
+      .case-gallery {
+        gap: 40px;
+      }
+    }
+
+    /* FOOTER */
+    footer {
+      padding-top: 52px;
+      margin-top: 64px;
+    }
+
+    .footer-inner {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+      min-height: 300px;
+    }
+
+    .footer-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .footer-divider {
+      font-size: clamp(16px, 1.6vw, 20px);
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      user-select: none;
+    }
+
+    .footer-heading {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(34px, 4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 36px;
+    }
+
+    .footer-link {
+      font-family: 'Manrope-Medium', system-ui, sans-serif;
+      font-size: clamp(16px, 1.5vw, 19px);
+      color: var(--text-muted);
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .footer-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: #c92380;
+      transition: width var(--transition-fast);
+    }
+
+    .footer-link:hover::after {
+      width: 100%;
+    }
+
+    .footer-meta {
+      font-family: 'Manrope-Medium', system-ui, sans-serif;
+      font-size: clamp(13px, 1.1vw, 15px);
+      line-height: 1.7;
+      color: var(--text-muted);
+      opacity: 0.7;
+      margin-top: 8px;
+    }
+
+    .footer-image-wrap {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: flex-end;
+      overflow: visible;
+    }
+
+    .footer-sticker-link {
+      display: block;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .footer-sticker-link:hover {
+      animation: footerStickerSwing 0.5s ease-in-out;
+    }
+
+    .footer-sticker-link:focus-visible {
+      outline: 2px solid var(--text-main);
+      outline-offset: 4px;
+      border-radius: 8px;
+    }
+
+    .footer-sticker-link.is-clicked .footer-image {
+      animation: footerStickerPop 0.35s ease-out;
+    }
+
+    @keyframes footerStickerSwing {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-4deg); }
+      50% { transform: rotate(2deg); }
+      75% { transform: rotate(-1deg); }
+    }
+
+    @keyframes footerStickerPop {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.08); }
+      70% { transform: scale(0.98); }
+      100% { transform: scale(1); }
+    }
+
+    .footer-image {
+      width: 100%;
+      max-width: 440px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 26px 60px rgba(0, 0, 0, 0.22));
+    }
+
+    .fixed-footer-overlay {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      z-index: 999;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      mask-image: linear-gradient(
+        to top,
+        rgba(245, 245, 247, 0.15) 0%,
+        rgba(245, 245, 247, 0.1) 25%,
+        rgba(245, 245, 247, 0.06) 50%,
+        rgba(245, 245, 247, 0.03) 75%,
+        rgba(245, 245, 247, 0) 100%
+      );
+      pointer-events: none;
+      transition: background 0.3s ease;
+    }
+
+    body.dark-mode .fixed-footer-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(26, 26, 36, 0.15) 0%,
+        rgba(26, 26, 36, 0.1) 25%,
+        rgba(26, 26, 36, 0.06) 50%,
+        rgba(26, 26, 36, 0.03) 75%,
+        rgba(26, 26, 36, 0) 100%
+      );
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        padding: 0 16px;
+      }
+
+      .nav-right {
+        gap: 12px;
+      }
+
+      .nav-right .nav-link-group {
+        display: none;
+      }
+
+      .page {
+        padding-inline: 16px;
+      }
+
+            .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-image {
+        max-width: 340px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-right {
+        display: none;
+      }
+    }
+
+    /* ====== VIEW PILL (cursor-following hover label) ====== */
+    .view-pill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-family: 'Manrope-Medium', 'Manrope', system-ui, sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      background: rgba(255, 255, 255, 0.95);
+      color: #1a1a24;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      will-change: transform, opacity;
+    }
+
+    body.dark-mode .view-pill {
+      background: rgba(26, 26, 36, 0.95);
+      color: #f5f5f7;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .view-pill {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="custom-cursor"></div>
+
+  <!-- NAVBAR -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <div class="nav-left">
+        <a href="/" class="brand-logo-link">
+          <img src="img/avi brand logo.svg" alt="Avi logo" class="brand-logo" />
+        </a>
+      </div>
+      <nav class="nav-center nav-link-group">
+        <a class="nav-link" href="work.html">Work</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="playground.html" id="playground-link">Playground</a>
+        <a class="nav-link" href="https://docs.google.com/file/d/1FcgBev2uLHajdEr-AR8Y8zZowP1TgBxC9SiynNh5iCk/view" target="_blank" rel="noopener noreferrer">Resume</a>
+      </nav>
+      <div class="nav-right">
+        <a class="nav-link nav-link--primary" href="mailto:lara.avilenne@gmail.com" aria-label="Email Avi">
+          Contact
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page">
+      <section class="work-hero">
+        <h1>Featured projects</h1>
+        <p>
+          A focused showcase of the case studies that have shaped my practice. Each project here includes the story, strategy, and craft behind the visual systems, service touchpoints, and spatial moments I build for people and teams.
+        </p>
+      </section>
+    </div>
+
+    <div class="section-divider" aria-hidden="true">• . ݁₊ ⊹ . ݁꒰ঌ·✦·໒꒱ ݁ . ⊹ ₊ ݁. •</div>
+
+    <section id="case-studies">
+      <div class="case-studies-container">
+        <div class="case-gallery">
+          <!-- Case 1 (Giveback) - image-only card, same as homepage -->
+          <article class="case-card case-card--giveback" data-case-study="case-study-1.html">
+            <a class="case-card-link case-card-link--giveback" href="case-study-1.html">
+              <img src="img/homepage/PIH%20case%20study%20card.png" alt="Partners In Health donation kiosk case study card" class="case-card-image case-card-image--giveback" />
+              <span class="sr-only">The Giveback – Partners In Health Donation Kiosk. Case study.</span>
+            </a>
+          </article>
+
+          <!-- Case 2 (Aviary) -->
+          <article class="case-card case-card--aviary" data-case-study="case-study-2.html">
+            <a class="case-card-link case-card-link--aviary" href="case-study-2.html">
+              <img src="img/homepage/The%20aviary%20case%20study%20card.png" alt="The Aviary case study card" class="case-card-image case-card-image--aviary" />
+              <span class="sr-only">The Aviary. Case study.</span>
+            </a>
+          </article>
+
+          <!-- Case 3 (Allen Gardens) -->
+          <article class="case-card case-card--allan" data-case-study="case-study-3.html">
+            <a class="case-card-link case-card-link--allan" href="case-study-3.html">
+              <img src="img/homepage/Allen%20gardens%20case%20study%20card.png" alt="Allen Gardens wayfinding case study card" class="case-card-image case-card-image--allan" />
+              <span class="sr-only">Allan Gardens Wayfinding. Case study.</span>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="page">
+      <section id="contact" style="height: 1px;"></section>
+      <footer>
+        <div class="footer-inner">
+          <div class="footer-text">
+            <p class="footer-divider" aria-hidden="true">♡.•♬✧⁽⁽ଘ( ˊᵕˋ )ଓ⁾⁾*+:•*∴✰</p>
+            <h2 class="footer-heading">Nice to see you here!</h2>
+            <div class="footer-links">
+              <a class="footer-link" href="mailto:lara.avilenne@gmail.com">Email ↗</a>
+              <a class="footer-link" href="https://www.linkedin.com/in/avilennelara" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            </div>
+            <p class="footer-meta">Made with luv © 2026 Avilenne Lara 🎀<br>This website is best viewed on desktop.</p>
+          </div>
+          <div class="footer-image-wrap">
+            <a class="footer-sticker-link" href="mailto:lara.avilenne@gmail.com" aria-label="Email me to connect">
+              <img class="footer-image" src="img/homepage/avi-lets-connect-sticker.png" alt="Let's connect sticker" />
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <div class="fixed-footer-overlay"></div>
+
+  <!-- GSAP & Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Universal Page Transitions -->
+  <script src="js/page-transitions.js"></script>
+
+  <script>
+    const nav = document.getElementById('nav');
+    function handleNavbarScroll() {
+      if (window.scrollY > 80) {
+        nav.classList.add('nav--floating');
+      } else {
+        nav.classList.remove('nav--floating');
+      }
+    }
+
+    let navTicking = false;
+    window.addEventListener('scroll', () => {
+      if (!navTicking) {
+        window.requestAnimationFrame(() => {
+          handleNavbarScroll();
+          navTicking = false;
+        });
+        navTicking = true;
+      }
+    });
+
+    handleNavbarScroll();
+
+    // Dark mode - apply saved preference
+    const savedDarkMode = localStorage.getItem('darkMode') === 'enabled';
+    if (savedDarkMode) {
+      document.body.classList.add('dark-mode');
+    }
+    
+    // Setup toggle if it exists
+    const darkModeToggle = document.getElementById('darkModeToggle') || document.querySelector('.dark-mode-toggle');
+    if (darkModeToggle) {
+      const sunIcon = document.querySelector('.sun-icon');
+      const moonIcon = document.querySelector('.moon-icon');
+
+      if (savedDarkMode && sunIcon && moonIcon) {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+
+      darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isNowDark = document.body.classList.contains('dark-mode');
+
+        if (sunIcon && moonIcon) {
+          if (isNowDark) {
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+          } else {
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+          }
+        }
+
+        localStorage.setItem('darkMode', isNowDark ? 'enabled' : 'disabled');
+      });
+    }
+
+    const cursor = document.querySelector('.custom-cursor');
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    let rafId = null;
+    function updateCursor() {
+      const dx = mouseX - cursorX;
+      const dy = mouseY - cursorY;
+      cursorX += dx * 0.2;
+      cursorY += dy * 0.2;
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      rafId = requestAnimationFrame(updateCursor);
+    }
+
+    updateCursor();
+
+    const interactiveElements = document.querySelectorAll('a, button, .case-card, .nav-link, .dark-mode-toggle');
+    interactiveElements.forEach(element => {
+      element.addEventListener('mouseenter', () => {
+        document.body.classList.add('hovering-link');
+      });
+      element.addEventListener('mouseleave', () => {
+        document.body.classList.remove('hovering-link');
+      });
+    });
+
+    if (typeof gsap !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+      const storedScrollTriggers = new Map();
+
+      document.querySelectorAll('.case-card').forEach((card, index) => {
+        const triggerId = `case-card-${index}`;
+        if (!storedScrollTriggers.has(triggerId)) {
+          const trigger = gsap.from(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+              once: true
+            },
+            y: 30,
+            duration: 0.6,
+            ease: 'power2.out'
+          });
+          storedScrollTriggers.set(triggerId, trigger);
+        }
+      });
+
+      document.querySelectorAll('.case-card').forEach(card => {
+        function hoverIn()  { gsap.to(card, { scale: 1.02, duration: 0.35, ease: 'power2.out', overwrite: true }); }
+        function hoverOut() { gsap.to(card, { scale: 1, duration: 0.35, ease: 'power2.out', overwrite: true }); }
+
+        card.addEventListener('mouseenter', hoverIn);
+        card.addEventListener('mouseleave', hoverOut);
+
+        var link = card.querySelector('a');
+        if (link) {
+          link.addEventListener('focus', hoverIn);
+          link.addEventListener('blur', hoverOut);
+        }
+      });
+
+      gsap.from('.footer-heading', {
+        scrollTrigger: {
+          trigger: 'footer',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        x: -50,
+        duration: 1,
+        ease: 'power3.out'
+      });
+
+      gsap.from('.footer-note', {
+        scrollTrigger: {
+          trigger: 'footer',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 30,
+        duration: 1,
+        delay: 0.2,
+        ease: 'power3.out'
+      });
+
+      gsap.from('.footer-image', {
+        scrollTrigger: {
+          trigger: 'footer',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        x: 100,
+        rotation: 5,
+        duration: 1.2,
+        delay: 0.3,
+        ease: 'power3.out'
+      });
+
+      const footerStickerLink = document.querySelector('.footer-sticker-link');
+      if (footerStickerLink) {
+        footerStickerLink.addEventListener('click', function () {
+          this.classList.add('is-clicked');
+          setTimeout(() => this.classList.remove('is-clicked'), 350);
+        });
+      }
+    }
+  </script>
+  <script src="js/hover-cards.js"></script>
+</body>
+</html>
+

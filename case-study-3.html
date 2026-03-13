@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Allan Gardens Wayfinding - Case Study</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="img/avi brand logo.svg" />
+  <style>
+    @font-face {
+      font-family: 'Awesome';
+      src: url('fonts/awesome-light.otf') format('opentype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    
+    @font-face {
+      font-family: 'Awesome';
+      src: url('fonts/awesome-medium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Freight Text Pro Semibold';
+      src: url('fonts/fonnts.com-Freight-Text-Pro-Semibold-.otf') format('opentype');
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Manrope-Medium';
+      src: url('fonts/Manrope-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    :root {
+      --bg: #f5f5f7;
+      --bg-elevated: #ffffff;
+      --bg-gradient-start: #ffffff;
+      --bg-gradient-end: #f5f5f7;
+      --bg-section: #f9fafb;
+      --border-subtle: rgba(0, 0, 0, 0.06);
+      --text-main: #2f332f;
+      --text-muted: #7a7a80;
+      --accent: #e67e80;
+      --accent-soft: rgba(230, 126, 128, 0.15);
+      --nav-bg: rgba(245, 245, 247, 0.55);
+      --nav-bg-scrolled: rgba(245, 245, 247, 0.75);
+      --logo-bg: rgba(255, 255, 255, 0.9);
+      --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.7), 0 6px 12px rgba(0, 0, 0, 0.12);
+      --shadow-md: 0 14px 40px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.03);
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --transition-fast: 180ms ease-out;
+    }
+
+    body.dark-mode {
+      --bg: #0a0a0f;
+      --bg-elevated: #1a1a24;
+      --bg-gradient-start: #1a1a24;
+      --bg-gradient-end: #0a0a0f;
+      --bg-section: #14141f;
+      --text-main: #e8e8ed;
+      --text-muted: #9a9aa5;
+      --accent: #f0a0a1;
+      --accent-soft: rgba(240, 160, 161, 0.2);
+      --nav-bg: rgba(10, 10, 15, 0.55);
+      --nav-bg-scrolled: rgba(10, 10, 15, 0.75);
+      --logo-bg: rgba(26, 26, 36, 0.9);
+      --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 6px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 14px 40px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Manrope-Medium", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at top, var(--bg-gradient-start) 0, var(--bg-gradient-end) 52%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      padding-top: 72px;
+      padding-bottom: 0;
+      transition: background 0.3s ease, color 0.3s ease;
+      cursor: none;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Paper texture overlay - scrolls with content, crisp and continuous */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('img/paper.png');
+      background-repeat: repeat;
+      background-size: 500px 593px;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body.dark-mode::before {
+      opacity: 0.18;
+    }
+
+    /* Ensure all direct children of body are above the texture */
+    body > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    body.transitioning {
+      overflow: hidden;
+    }
+
+    /* Global heading styles - ensure all headings use Freight Text Pro Semibold */
+    h1, h2, h3 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-weight: 600;
+    }
+
+    /* Custom Cursor */
+    * {
+      cursor: none !important;
+    }
+    
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 2147483647;
+      transform: translate(-50%, -50%);
+      background: #2f332f;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+      will-change: transform;
+      opacity: 1;
+      display: block;
+      visibility: visible;
+    }
+
+    body.dark-mode .custom-cursor {
+      background: #e8e8ed;
+      border: 2px solid #0a0a0f;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    body.hovering-link .custom-cursor {
+      transform: translate(-50%, -50%) scale(1.3);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* NAVBAR */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 24px 48px;
+      pointer-events: none;
+      transition: all 0.35s ease;
+    }
+
+    .nav__inner {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-bottom: 16px;
+      pointer-events: auto;
+      background: transparent;
+      transition: all 0.35s ease;
+    }
+
+    body.dark-mode .nav__inner {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* Floating pill state */
+    .nav.nav--floating {
+      top: 0;
+    }
+
+    .nav.nav--floating .nav__inner {
+      max-width: 760px;
+      padding: 10px 24px;
+      border-bottom: none;
+      border-radius: 999px;
+      background: rgba(230, 230, 235, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+    }
+
+    body.dark-mode .nav.nav--floating .nav__inner {
+      background: rgba(20, 20, 25, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      transition: gap 0.25s ease;
+    }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      transition: gap 0.25s ease;
+    }
+
+    .nav.nav--floating .nav-left,
+    .nav.nav--floating .nav-right {
+      gap: 16px;
+    }
+
+    .nav.nav--floating .nav-center {
+      gap: 16px;
+    }
+
+    .nav.nav--floating .nav-left {
+      padding-right: 20px;
+      margin-right: 16px;
+      border-right: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    body.dark-mode .nav.nav--floating .nav-left {
+      border-right-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .brand-logo-link {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .brand-logo {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-link-group {
+      display: flex;
+      gap: 24px;
+      font-size: 15px;
+      color: var(--text-main);
+    }
+
+    .nav-link {
+      font-family: "Manrope-Medium", system-ui, sans-serif;
+      position: relative;
+      padding: 4px 0;
+      cursor: pointer;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2.5px;
+      border-radius: 999px;
+      background: #c92380;
+      transition: width var(--transition-fast);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.nav-link--primary {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #c92380;
+      color: var(--bg-elevated);
+      font-size: 14px;
+      transition: opacity var(--transition-fast), background var(--transition-fast);
+    }
+
+    .nav-link.nav-link--primary:hover {
+      opacity: 0.85;
+      background: #b01e6f;
+    }
+
+    .nav-link.nav-link--primary::after {
+      display: none;
+    }
+
+    .dark-mode-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: var(--logo-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform var(--transition-fast), background var(--transition-fast);
+    }
+
+    .dark-mode-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .dark-mode-toggle svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .dark-mode-toggle:active svg {
+      transform: rotate(180deg);
+    }
+
+    /* PAGE LAYOUT */
+    .page {
+      max-width: 90%;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* CASE STUDY HERO */
+    .case-study-hero {
+      max-width: 1100px;
+      margin: 0 auto 120px;
+    }
+
+    .case-mockup-wrap {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      padding: 0;
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 400px;
+      overflow: hidden;
+    }
+
+    .case-mockup-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .case-study-title {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-weight: 600;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .case-study-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .case-details {
+      padding-right: 20px;
+    }
+
+    .case-details h2 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .case-details p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .case-info {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--accent-soft);
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .info-value {
+      font-size: 14px;
+      color: var(--text-main);
+      text-align: right;
+    }
+
+    /* CASE STUDY SECTIONS */
+    .case-section {
+      max-width: 1100px;
+      margin: 0 auto 100px;
+    }
+
+    .section-heading {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+
+    .section-intro {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 65ch;
+      margin-bottom: 40px;
+    }
+
+    /* Problem & Solution */
+    .problem-solution-block {
+      background: var(--bg-section);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .ps-card {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .ps-card h3 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .ps-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* Constraints & Scope */
+    .constraints-scope-block {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      box-shadow: var(--shadow-md);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .constraints-scope-item h3 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .constraints-scope-item ul {
+      list-style: none;
+    }
+
+    .constraints-scope-item li {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .constraints-scope-item li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Quotes Block */
+    .quotes-block {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .quotes-block h2 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 600;
+      margin-bottom: 32px;
+      letter-spacing: -0.02em;
+    }
+
+    .quotes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .quote-item {
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--accent-soft);
+    }
+
+    .quote-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .quote-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-main);
+      font-style: italic;
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .quote-text::before {
+      content: '"';
+      position: absolute;
+      left: 0;
+      top: -4px;
+      font-size: 32px;
+      color: var(--accent);
+      opacity: 0.3;
+      font-family: 'Freight Text Pro Semibold', serif;
+    }
+
+    .quote-caption {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding-left: 24px;
+    }
+
+    /* Impact / Results */
+    .impact-block {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .impact-block h2 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .impact-block p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      max-width: 70ch;
+      margin-bottom: 24px;
+    }
+
+    .impact-block ul {
+      list-style: none;
+      max-width: 70ch;
+    }
+
+    .impact-block li {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      padding-left: 24px;
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .impact-block li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    /* Next Steps */
+    .next-steps-block {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .next-steps-block h2 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .next-steps-block p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      max-width: 70ch;
+      margin-bottom: 24px;
+    }
+
+    .next-steps-block ul {
+      list-style: none;
+      max-width: 70ch;
+    }
+
+    .next-steps-block li {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      padding-left: 24px;
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .next-steps-block li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* Competitive Analysis */
+    .comp-analysis-block {
+      background: var(--bg-section);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+    }
+
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin-top: 32px;
+    }
+
+    .comp-item {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .comp-mockup {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(135deg, #fce5e5 0%, #f8d0d1 100%);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .comp-caption {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Persona Section */
+    .persona-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .persona-card {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .persona-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e67e80 0%, #f0a0a1 100%);
+      margin: 0 auto 20px;
+    }
+
+    .persona-name {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .persona-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .persona-bio {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .persona-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .persona-tag {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .persona-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .persona-detail-card {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .persona-detail-card h3 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .persona-detail-card ul {
+      list-style: none;
+    }
+
+    .persona-detail-card li {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .persona-detail-card li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* My Process */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .process-card {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .process-card h3 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .process-card p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .process-card ul {
+      list-style: none;
+    }
+
+    .process-card li {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .process-card li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* Paper Prototypes */
+    .prototype-media {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 24px;
+    }
+
+    .prototype-placeholder {
+      width: 100%;
+      aspect-ratio: 20 / 9;
+      background: linear-gradient(135deg, #f0e5ff 0%, #e0ccff 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .media-caption {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 70ch;
+    }
+
+    /* User Interviews */
+    .interview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin-top: 32px;
+    }
+
+    .interview-item {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .interview-media {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, #1a1a24 0%, #2a2a3a 100%);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 13px;
+    }
+
+    .interview-caption {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* Key Improvements */
+    .improvements-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .improvement-card {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      padding-left: 48px;
+    }
+
+    .improvement-icon {
+      position: absolute;
+      left: 32px;
+      top: 32px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .improvement-card h3 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .improvement-card p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* Key Learnings */
+    .learnings-block {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .learnings-block h2 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .learnings-block p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      max-width: 70ch;
+      margin-bottom: 20px;
+    }
+
+    .learnings-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Final Design */
+    .final-design-wrap {
+      background: #0a0a0f;
+      border-radius: var(--radius-xl);
+      padding: 60px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .final-design-placeholder {
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(135deg, #1a1a24 0%, #2a2a3a 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 14px;
+    }
+
+    /* Case Study Navigation */
+    .case-nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+    }
+
+        /* FOOTER */
+    footer {
+      padding-top: 52px;
+      margin-top: 64px;
+    }
+
+    .footer-inner {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+      min-height: 300px;
+    }
+
+    .footer-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .footer-divider {
+      font-size: clamp(16px, 1.6vw, 20px);
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      user-select: none;
+    }
+
+    .footer-heading {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(34px, 4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 36px;
+    }
+
+    .footer-link {
+      font-family: 'Manrope-Medium', system-ui, sans-serif;
+      font-size: clamp(16px, 1.5vw, 19px);
+      color: var(--text-muted);
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .footer-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: #c92380;
+      transition: width var(--transition-fast);
+    }
+
+    .footer-link:hover::after {
+      width: 100%;
+    }
+
+    .footer-meta {
+      font-family: 'Manrope-Medium', system-ui, sans-serif;
+      font-size: clamp(13px, 1.1vw, 15px);
+      line-height: 1.7;
+      color: var(--text-muted);
+      opacity: 0.7;
+      margin-top: 8px;
+    }
+
+    .footer-image-wrap {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: flex-end;
+      overflow: visible;
+    }
+
+    .footer-sticker-link {
+      display: block;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .footer-sticker-link:hover {
+      animation: footerStickerSwing 0.5s ease-in-out;
+    }
+
+    .footer-sticker-link:focus-visible {
+      outline: 2px solid var(--text-main);
+      outline-offset: 4px;
+      border-radius: 8px;
+    }
+
+    .footer-sticker-link.is-clicked .footer-image {
+      animation: footerStickerPop 0.35s ease-out;
+    }
+
+    @keyframes footerStickerSwing {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-4deg); }
+      50% { transform: rotate(2deg); }
+      75% { transform: rotate(-1deg); }
+    }
+
+    @keyframes footerStickerPop {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.08); }
+      70% { transform: scale(0.98); }
+      100% { transform: scale(1); }
+    }
+
+    .footer-image {
+      width: 100%;
+      max-width: 440px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 26px 60px rgba(0, 0, 0, 0.22));
+    }
+
+
+    /* FIXED FOOTER OVERLAY */
+    .fixed-footer-overlay {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      z-index: 999;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      mask-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.85) 30%,
+        rgba(0, 0, 0, 0.5) 60%,
+        rgba(0, 0, 0, 0.2) 80%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.85) 30%,
+        rgba(0, 0, 0, 0.5) 60%,
+        rgba(0, 0, 0, 0.2) 80%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      background: linear-gradient(
+        to top,
+        rgba(245, 245, 247, 0.15) 0%,
+        rgba(245, 245, 247, 0.1) 25%,
+        rgba(245, 245, 247, 0.06) 50%,
+        rgba(245, 245, 247, 0.03) 75%,
+        rgba(245, 245, 247, 0) 100%
+      );
+      pointer-events: none;
+      transition: background 0.3s ease;
+    }
+
+    body.dark-mode .fixed-footer-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(26, 26, 36, 0.15) 0%,
+        rgba(26, 26, 36, 0.1) 25%,
+        rgba(26, 26, 36, 0.06) 50%,
+        rgba(26, 26, 36, 0.03) 75%,
+        rgba(26, 26, 36, 0) 100%
+      );
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav {
+        padding: 0 16px;
+      }
+
+      .page {
+        padding-inline: 16px;
+      }
+
+      .case-study-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .case-details {
+        padding-right: 0;
+      }
+
+      .case-mockup-wrap {
+        padding: 0;
+      }
+
+      .problem-solution-block,
+      .comp-analysis-block,
+      .learnings-block,
+      .constraints-scope-block,
+      .quotes-block,
+      .impact-block,
+      .next-steps-block {
+        padding: 32px 24px;
+      }
+
+      .constraints-scope-block {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .comp-grid,
+      .process-grid,
+      .interview-grid,
+      .improvements-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .persona-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .case-section {
+        margin-bottom: 80px;
+      }
+
+            .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-image {
+        max-width: 340px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .case-mockup-wrap {
+        padding: 0;
+      }
+
+      .problem-solution-block,
+      .comp-analysis-block,
+      .learnings-block,
+      .constraints-scope-block,
+      .quotes-block,
+      .impact-block,
+      .next-steps-block {
+        padding: 24px 20px;
+      }
+
+      .final-design-wrap {
+        padding: 40px 20px;
+      }
+    }
+
+    /* ====== DECORATIVE STICKERS (Case Study 3 only) ====== */
+
+    .sticker-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .sticker {
+      position: absolute;
+      pointer-events: auto;
+      width: 145px;
+      height: auto;
+      transform-origin: top center;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .sticker:hover {
+      animation: stickerSwing 0.6s ease forwards;
+    }
+
+    @keyframes stickerSwing {
+      0%   { rotate: var(--rest, 0deg); }
+      20%  { rotate: calc(var(--rest, 0deg) + 8deg); }
+      40%  { rotate: calc(var(--rest, 0deg) - 6deg); }
+      60%  { rotate: calc(var(--rest, 0deg) + 4deg); }
+      80%  { rotate: calc(var(--rest, 0deg) - 2deg); }
+      100% { rotate: var(--rest, 0deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sticker:hover { animation: none; transform: scale(1.04); }
+    }
+
+    @media (max-width: 1100px) {
+      .sticker-layer { display: none; }
+    }
+
+    /* ====== CAROUSEL ====== */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .carousel-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      overscroll-behavior-x: contain;
+      height: 100%;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.85);
+      color: #2f332f;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s ease, background 0.15s ease;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .carousel-container:hover .carousel-btn,
+    .carousel-btn:focus-visible {
+      opacity: 1;
+    }
+
+    .carousel-btn--prev { left: 12px; }
+    .carousel-btn--next { right: 12px; }
+
+    /* Persona avatar as image */
+    img.persona-avatar {
+      object-fit: cover;
+    }
+
+    /* Competitor / observation card images */
+    .comp-mockup img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Room flow / journey single image */
+    .room-flow-image {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+
+    /* Final design carousel wrap */
+    .final-design-carousel-wrap {
+      background: #0a0a0f;
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+
+  <!-- NAVBAR -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <div class="nav-left">
+        <a href="/" class="brand-logo-link">
+          <img src="img/avi brand logo.svg" alt="Avi logo" class="brand-logo" />
+        </a>
+      </div>
+      <nav class="nav-center nav-link-group">
+        <a class="nav-link" href="work.html">Work</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="playground.html" id="playground-link">Playground</a>
+        <a class="nav-link" href="https://docs.google.com/file/d/1FcgBev2uLHajdEr-AR8Y8zZowP1TgBxC9SiynNh5iCk/view" target="_blank" rel="noopener noreferrer">Resume</a>
+      </nav>
+      <div class="nav-right">
+        <a class="nav-link nav-link--primary" href="mailto:lara.avilenne@gmail.com" aria-label="Email Avi">
+          Contact
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main style="position:relative; overflow-x:clip;">
+    <!-- Decorative sticker layer (populated by JS) -->
+    <div class="sticker-layer" id="stickerLayer" aria-hidden="true"></div>
+
+    <div class="page">
+      <!-- HERO SECTION -->
+      <section class="case-study-hero">
+        <div class="case-mockup-wrap">
+          <img src="img/CaseStudy3/Screenshot%202026-03-11%20at%2013.32.55.png" alt="Allan Gardens Wayfinding overview" />
+        </div>
+
+        <h1 class="case-study-title">Allan Gardens Wayfinding</h1>
+
+        <div class="case-study-content">
+          <div class="case-details">
+            <h2>Project Details</h2>
+            <p>
+              A wayfinding system designed to guide visitors from the Allan Gardens parking lot into the historic conservatory. The project addressed navigation challenges caused by confusing signage, multiple entrances, and a disconnection between the parking area and the conservatory's main entrance.
+            </p>
+            <p>
+              Through site observations, journey mapping, and visitor research, I designed a cohesive signage system that prioritizes clarity, accessibility, and environmental integration while respecting the site's heritage character.
+            </p>
+          </div>
+
+          <div class="case-info">
+            <div class="info-row">
+              <span class="info-label">Duration</span>
+              <span class="info-value">14 weeks</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Team</span>
+              <span class="info-value">4 UX designers</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Role</span>
+              <span class="info-value">Designer & Information Architect</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Tools</span>
+              <span class="info-value">SketchUp, Illustrator, Procreate, Photoshop</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROBLEM & SOLUTION SECTION -->
+      <section class="case-section">
+        <div class="problem-solution-block">
+          <div class="ps-card">
+            <h3>Context / Brief</h3>
+            <p>
+              Allan Gardens is a historic conservatory in downtown Toronto. Visitors arriving by car must navigate from the parking lot entrance on Jarvis Street to the conservatory entrance on Horticultural Avenue—a journey that is currently confusing and poorly signed, leading to frustration and missed visits.
+            </p>
+          </div>
+          <div class="ps-card">
+            <h3>Challenge</h3>
+            <p>
+              Visitors often enter through the wrong gate, miss directional cues, or give up entirely due to unclear wayfinding. The site has multiple entrances, no visible signage from the parking lot, and environmental barriers (fencing, pathways) that obscure the correct route. The challenge was to design a signage system that works within heritage site constraints while improving visitor confidence and circulation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONSTRAINTS & SCOPE SECTION -->
+      <section class="case-section">
+        <div class="constraints-scope-block">
+          <div class="constraints-scope-item">
+            <h3>Goal</h3>
+            <p>
+              Design a clear, accessible wayfinding system that guides visitors from the parking lot entrance to the conservatory main entrance, reducing confusion and improving the arrival experience.
+            </p>
+          </div>
+          <div class="constraints-scope-item">
+            <h3>Deliverables</h3>
+            <ul>
+              <li>Site analysis and journey mapping</li>
+              <li>Signage system with directional, informational, and identificational signs</li>
+              <li>Visual identity for signage (typography, iconography, color)</li>
+              <li>Placement recommendations and mockups</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPETITIVE ANALYSIS SECTION -->
+      <section class="case-section">
+        <div class="comp-analysis-block">
+          <h2 class="section-heading">Site observations & opportunity</h2>
+          <p class="section-intro">
+            I conducted site visits to observe visitor behavior, photograph existing signage, and map the physical environment. These observations revealed critical gaps in the current wayfinding system and informed design priorities.
+          </p>
+          
+          <div class="comp-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="comp-item">
+              <div class="comp-mockup" style="aspect-ratio: 1 / 1; overflow: hidden; background: none;"><img src="img/CaseStudy3/Screenshot%202026-03-11%20at%2013.42.04.png" alt="Identification signage observations" /></div>
+              <p class="comp-caption">Identification signage: how the conservatory marks its presence at entrances and key landmarks across the site.</p>
+            </div>
+            <div class="comp-item">
+              <div class="comp-mockup" style="aspect-ratio: 1 / 1; overflow: hidden; background: none;"><img src="img/CaseStudy3/Screenshot%202026-03-11%20at%2013.41.24.png" alt="Orientational signage observations" /></div>
+              <p class="comp-caption">Orientational signage: maps and overview panels that help visitors understand the site layout and plan their route.</p>
+            </div>
+            <div class="comp-item">
+              <div class="comp-mockup" style="aspect-ratio: 1 / 1; overflow: hidden; background: none;"><img src="img/CaseStudy3/Screenshot%202026-03-11%20at%2013.41.02.png" alt="Directional signage observations" /></div>
+              <p class="comp-caption">Directional signage: arrows and route markers guiding visitors from the parking lot toward the conservatory entrance.</p>
+            </div>
+            <div class="comp-item">
+              <div class="comp-mockup" style="aspect-ratio: 1 / 1; overflow: hidden; background: none;"><img src="img/CaseStudy3/Screenshot%202026-03-11%20at%2013.40.04.png" alt="Regulatory signage observations" /></div>
+              <p class="comp-caption">Regulatory signage: rules, hours, and safety information that visitors encounter throughout the grounds.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PERSONA SECTION -->
+      <section class="case-section">
+        <h2 class="section-heading">Persona</h2>
+        <div class="persona-layout">
+          <div class="persona-card">
+            <img class="persona-avatar" src="img/CaseStudy3/Screenshot%202026-03-11%20at%2013.44.23.png" alt="Amelia Lancaster persona" />
+            <h3 class="persona-name">Amelia Lancaster</h3>
+            <p class="persona-subtitle">Weekend visitor with mobility considerations</p>
+            <p class="persona-bio">
+              Amelia is a 62-year-old retired librarian who visits Allan Gardens once a month to enjoy the plant collections. She drives to the site but often struggles with unclear signage and long walking distances from the parking lot.
+            </p>
+            <div class="persona-tags">
+              <span class="persona-tag">Age: 62</span>
+              <span class="persona-tag">Toronto</span>
+              <span class="persona-tag">Occasional visitor</span>
+            </div>
+          </div>
+
+          <div class="persona-details">
+            <div class="persona-detail-card">
+              <h3>Goals</h3>
+              <ul>
+                <li>Park conveniently and find the conservatory entrance easily</li>
+                <li>Avoid unnecessary walking or wrong turns due to poor signage</li>
+                <li>Feel confident navigating the site independently</li>
+                <li>Enjoy a relaxed, stress-free visit</li>
+              </ul>
+            </div>
+            <div class="persona-detail-card">
+              <h3>Frustrations</h3>
+              <ul>
+                <li>No visible signs directing visitors from parking lot to conservatory</li>
+                <li>Multiple entrances with no clear indication of which is correct</li>
+                <li>Long walking distances when she takes the wrong path</li>
+                <li>Inconsistent or missing wayfinding cues throughout the site</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- QUOTES SECTION -->
+      <section class="case-section">
+        <div class="quotes-block">
+          <h2>Key insights from observations</h2>
+          <div class="quotes-list">
+            <div class="quote-item">
+              <p class="quote-text">Visitors arriving by car cannot see the conservatory from the parking lot, leading to confusion about which direction to walk.</p>
+            </div>
+            <div class="quote-item">
+              <p class="quote-text">Existing signage is faded, inconsistent in style, and placed at decision points too late for visitors to course-correct easily.</p>
+            </div>
+            <div class="quote-item">
+              <p class="quote-text">Multiple entry points (including locked or secondary gates) create uncertainty about which entrance is the "right" one.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MY PROCESS SECTION -->
+      <section class="case-section">
+        <h2 class="section-heading">My Process</h2>
+        <div class="process-grid">
+          <div class="process-card">
+            <h3>Discover</h3>
+            <p>Conducted site visits and observations to understand visitor behavior and circulation patterns.</p>
+            <ul>
+              <li>Site photography and documentation</li>
+              <li>Visitor observation sessions</li>
+              <li>Existing signage audit</li>
+              <li>Circulation and sightline mapping</li>
+            </ul>
+          </div>
+
+          <div class="process-card">
+            <h3>Define</h3>
+            <p>Synthesized findings to identify wayfinding pain points and design priorities.</p>
+            <ul>
+              <li>Journey mapping (parking to entrance)</li>
+              <li>Decision point identification</li>
+              <li>Accessibility considerations</li>
+              <li>Heritage site constraints</li>
+            </ul>
+          </div>
+
+          <div class="process-card">
+            <h3>Design</h3>
+            <p>Developed a cohesive signage system with clear visual language and strategic placement.</p>
+            <ul>
+              <li>Sign typology and hierarchy</li>
+              <li>Typography and iconography</li>
+              <li>Material and color palette</li>
+              <li>Placement strategy and mockups</li>
+            </ul>
+          </div>
+
+          <div class="process-card">
+            <h3>Deliver</h3>
+            <p>Finalized signage specifications and created implementation recommendations.</p>
+            <ul>
+              <li>Final signage designs</li>
+              <li>Placement diagrams</li>
+              <li>Material specifications</li>
+              <li>Implementation guidelines</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAPER PROTOTYPES SECTION -->
+      <section class="case-section">
+        <h2 class="section-heading">Concept development</h2>
+        <div class="prototype-media">
+          <div class="carousel-container" style="aspect-ratio: 16 / 9;" tabindex="0" aria-label="Concept development carousel" data-carousel>
+            <div class="carousel-track">
+              <div class="carousel-slide"><img src="img/CaseStudy3/Icons%20WIP.jpg" alt="Icons work in progress" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/Sign%20strat.jpg" alt="Signage strategy" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/Directional%20signages%20sketches%202.jpg" alt="Directional signage sketches 2" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/Directional%20signages%20sketches.jpg" alt="Directional signage sketches" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/Directional%20signage%20path.jpg" alt="Directional signage path" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/Column%20signage.jpg" alt="Column signage concept" /></div>
+            </div>
+            <button class="carousel-btn carousel-btn--prev" aria-label="Previous slide">&#8249;</button>
+            <button class="carousel-btn carousel-btn--next" aria-label="Next slide">&#8250;</button>
+          </div>
+        </div>
+        <p class="media-caption">
+          Early concepts explored different sign types, visual styles, and placement strategies. I tested various typographic hierarchies, iconography approaches, and color palettes to ensure signs would be visible, legible, and appropriate for a heritage site context. Iterations refined the balance between functional clarity and aesthetic integration with the conservatory's character.
+        </p>
+      </section>
+
+      <!-- USER INTERVIEWS SECTION -->
+      <section class="case-section">
+        <h2 class="section-heading">Journey mapping</h2>
+        <p class="section-intro">
+          I mapped the complete visitor journey from parking lot arrival to conservatory entrance, identifying every decision point, potential confusion moment, and opportunity for wayfinding intervention.
+        </p>
+        
+        <div class="prototype-media">
+          <img src="img/CaseStudy3/Circulation%20process.jpg" alt="Circulation process and journey map" class="room-flow-image" />
+        </div>
+        <p class="media-caption">
+          The circulation process maps the complete visitor journey from parking lot arrival to conservatory entrance, identifying every decision point, potential confusion moment, and opportunity for wayfinding intervention.
+        </p>
+      </section>
+
+      <!-- KEY IMPROVEMENTS SECTION -->
+      <section class="case-section">
+        <h2 class="section-heading">Outcomes</h2>
+        <div class="improvements-grid">
+          <div class="improvement-card">
+            <span class="improvement-icon"></span>
+            <h3>Key Improvements</h3>
+            <p>
+              The signage system introduces clear directional cues at every decision point, uses high-contrast typography for visibility, and integrates with the site's heritage character through material and color choices. Strategic placement ensures visitors see signs before reaching points of confusion, not after.
+            </p>
+          </div>
+          <div class="improvement-card">
+            <span class="improvement-icon"></span>
+            <h3>Key Learnings</h3>
+            <p>
+              Wayfinding isn't just about signs—it's about understanding visitor behavior, anticipating decision points, and designing for confidence. Site observations revealed that people need reassurance along the entire journey, not just at the start. Effective wayfinding reduces cognitive load and transforms a confusing experience into a welcoming one.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- NEXT STEPS SECTION -->
+      <section class="case-section">
+        <div class="next-steps-block">
+          <h2>Next Steps</h2>
+          <p>
+            With more time and resources, the signage system could expand to include digital wayfinding elements, seasonal visitor guides, and multilingual options to better serve Toronto's diverse community. Testing the implemented signs with real visitors would provide valuable feedback for further refinements and help validate placement and visibility decisions made during the design phase.
+          </p>
+        </div>
+      </section>
+
+      <!-- IMPACT SECTION -->
+      <section class="case-section">
+        <div class="impact-block">
+          <h2>Impact & Reflection</h2>
+          <p>
+            This project deepened my understanding of how physical space, user behavior, and information design intersect in wayfinding systems. I learned that effective wayfinding is less about adding signs and more about understanding visitor journeys, anticipating confusion points, and designing for confidence at every step. The most successful interventions were those that felt intuitive and unobtrusive, guiding visitors without overwhelming them.
+          </p>
+          <ul>
+            <li>Improved visitor navigation from parking lot to conservatory entrance</li>
+            <li>Reduced confusion and wrong turns at key decision points</li>
+            <li>Enhanced accessibility and confidence for visitors with mobility considerations</li>
+          </ul>
+        </div>
+      </section>
+      <section class="case-section">
+        <h2 class="section-heading">Final Design</h2>
+        <div class="final-design-carousel-wrap">
+          <div class="carousel-container" style="width: 100%; aspect-ratio: 16 / 9; border-radius: 12px;" tabindex="0" aria-label="Final design carousel" data-carousel>
+            <div class="carousel-track">
+              <div class="carousel-slide"><img src="img/CaseStudy3/A%20-%20Identification%20Signage%20-%20Wall%20painting%20Murals%201.jpg" alt="Identification Signage - Wall painting Murals 1" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/A%20-%20Identification%20Signage%20-%20Wall%20painting%20Murals%202.jpg" alt="Identification Signage - Wall painting Murals 2" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/A%20-%20Identification%20Signage%20-%20Wall%20painting%20Murals%203.jpg" alt="Identification Signage - Wall painting Murals 3" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/A%20-%20Identification%20-%20Overhead%20Signs.jpg" alt="Identification - Overhead Signs" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/A%20-%20Identification%20-%20Overhead%20Signs%202.jpg" alt="Identification - Overhead Signs 2" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/A%20-%20Identification%20-%20Overhead%20Signs%203.jpg" alt="Identification - Overhead Signs 3" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/A%20-%20Identification%20-%20Overhead%20Signs%204.jpg" alt="Identification - Overhead Signs 4" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/B3%20-%20Directional%20-%20Monolith.jpg" alt="Directional - Monolith sign" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/Sign%20Heights%20%26%20Placement.jpg" alt="Sign Heights and Placement" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/Sign%20Heights%20%26%20Placement%202.jpg" alt="Sign Heights and Placement 2" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/Sign%20Heights%20%26%20Placement%203.jpg" alt="Sign Heights and Placement 3" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/Sign%20Heights%20%26%20Placement%204.jpg" alt="Sign Heights and Placement 4" /></div>
+              <div class="carousel-slide"><img src="img/CaseStudy3/Screenshot%202026-03-11%20at%2013.33.39.png" alt="Final signage overview" /></div>
+            </div>
+            <button class="carousel-btn carousel-btn--prev" aria-label="Previous slide">&#8249;</button>
+            <button class="carousel-btn carousel-btn--next" aria-label="Next slide">&#8250;</button>
+          </div>
+        </div>
+        <p class="media-caption">
+          The final signage system includes directional signs at decision points, informational panels at key locations, and identificational signs at entrances. Each sign uses clear typography, intuitive iconography, and a color palette that complements the conservatory's heritage character while ensuring high visibility and legibility for all visitors.
+        </p>
+      </section>
+
+    </div>
+
+    <!-- CASE STUDY NAVIGATION -->
+    <section class="case-nav-section" style="padding: 60px 0; max-width: 1200px; margin: 0 auto;">
+      <div style="display: flex; justify-content: flex-start; align-items: center; gap: 24px;">
+        <a href="case-study-2.html" class="case-nav-btn case-nav-btn--prev" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: #c7cdd6; color: #2f332f; text-decoration: none; border-radius: 999px; font-size: 15px; font-weight: 500; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); transition: transform 0.2s ease, box-shadow 0.2s ease;">
+          <span style="font-size: 18px;">←</span>
+          <span>Previous case study</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <div class="page">
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-text">
+            <p class="footer-divider" aria-hidden="true">♡.•♬✧⁽⁽ଘ( ˊᵕˋ )ଓ⁾⁾*+:•*∴✰</p>
+            <h2 class="footer-heading">Nice to see you here!</h2>
+            <div class="footer-links">
+              <a class="footer-link" href="mailto:lara.avilenne@gmail.com">Email ↗</a>
+              <a class="footer-link" href="https://www.linkedin.com/in/avilennelara" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            </div>
+            <p class="footer-meta">Made with luv © 2026 Avilenne Lara 🎀<br>This website is best viewed on desktop.</p>
+          </div>
+        <div class="footer-image-wrap">
+          <a class="footer-sticker-link" href="mailto:lara.avilenne@gmail.com" aria-label="Email me to connect">
+            <img class="footer-image" src="img/homepage/avi-lets-connect-sticker.png" alt="Let's connect sticker" />
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Fixed Footer Overlay -->
+  <div class="fixed-footer-overlay"></div>
+
+  <!-- GSAP & Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Universal Page Transitions -->
+  <script src="js/page-transitions.js"></script>
+  
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Navbar floating pill animation
+    const nav = document.getElementById("nav");
+    
+    function handleNavbarScroll() {
+      if (window.scrollY > 80) {
+        nav.classList.add("nav--floating");
+      } else {
+        nav.classList.remove("nav--floating");
+      }
+    }
+    
+    // Throttle scroll events for better performance
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleNavbarScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+    
+    // Check initial scroll position
+    handleNavbarScroll();
+
+    // Dark mode - apply saved preference
+    const isDarkMode = localStorage.getItem("darkMode") === "true";
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+    }
+    
+    // Setup toggle if it exists
+    const darkModeToggle = document.getElementById("darkModeToggle") || document.querySelector('.dark-mode-toggle');
+    if (darkModeToggle) {
+      const sunIcon = darkModeToggle.querySelector(".sun-icon") || document.querySelector('.sun-icon');
+      const moonIcon = darkModeToggle.querySelector(".moon-icon") || document.querySelector('.moon-icon');
+      
+      if (isDarkMode && sunIcon && moonIcon) {
+        sunIcon.style.display = "none";
+        moonIcon.style.display = "block";
+      }
+      
+      darkModeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const isNowDark = document.body.classList.contains("dark-mode");
+        
+        if (sunIcon && moonIcon) {
+          if (isNowDark) {
+            sunIcon.style.display = "none";
+            moonIcon.style.display = "block";
+          } else {
+            sunIcon.style.display = "block";
+            moonIcon.style.display = "none";
+          }
+        }
+        
+        localStorage.setItem("darkMode", isNowDark);
+      });
+    }
+
+    const cursor = document.querySelector('.custom-cursor');
+    let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+    
+    // Smooth cursor follow - optimized with requestAnimationFrame
+    let rafId = null;
+    function updateCursor() {
+      const dx = mouseX - cursorX;
+      const dy = mouseY - cursorY;
+      
+      cursorX += dx * 0.2;
+      cursorY += dy * 0.2;
+      
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      
+      rafId = requestAnimationFrame(updateCursor);
+    }
+    updateCursor();
+    
+    document.querySelectorAll('a, button, .back-link, .logo').forEach(element => {
+      element.addEventListener('mouseenter', () => document.body.classList.add('hovering-link'));
+      element.addEventListener('mouseleave', () => document.body.classList.remove('hovering-link'));
+    });
+
+    // ===== PAGE TRANSITIONS =====
+    // Page transitions are now handled by js/page-transitions.js
+
+    // Section animations - optimized
+    const storedScrollTriggers = new Map();
+    document.querySelectorAll('.case-section').forEach((section, index) => {
+      const triggerId = `case-section-${index}`;
+      if (!storedScrollTriggers.has(triggerId)) {
+        const trigger = gsap.from(section, {
+          scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+            toggleActions: "play none none none",
+            once: true
+          },
+          opacity: 0,
+          y: 25,
+          duration: 0.6,
+          ease: "power2.out"
+        });
+        storedScrollTriggers.set(triggerId, trigger);
+      }
+    });
+
+    // ===== FOOTER ANIMATIONS =====
+
+    // Footer heading
+    gsap.from(".footer-heading", {
+      scrollTrigger: {
+        trigger: "footer",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      },
+      opacity: 0,
+      x: -50,
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    // Footer note
+    gsap.from(".footer-text", {
+      scrollTrigger: {
+        trigger: "footer",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      },
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      delay: 0.2,
+      ease: "power3.out"
+    });
+
+    // Footer image - slide in from right with rotation
+    gsap.from(".footer-image", {
+      scrollTrigger: {
+        trigger: "footer",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      },
+      opacity: 0,
+      x: 100,
+      rotation: 5,
+      duration: 1.2,
+      delay: 0.3,
+      ease: "power3.out"
+    });
+
+    const footerStickerLink = document.querySelector(".footer-sticker-link");
+    if (footerStickerLink) {
+      footerStickerLink.addEventListener("click", function () {
+        this.classList.add("is-clicked");
+        setTimeout(() => this.classList.remove("is-clicked"), 350);
+      });
+    }
+
+    // Navigation is now handled by js/page-transitions.js
+
+    // ===== DECORATIVE STICKERS (auto-generated, gutter-centered) =====
+    (function initStickers() {
+      const layer = document.getElementById('stickerLayer');
+      const contentCol = document.querySelector('.case-study-hero') || document.querySelector('.case-section');
+      if (!layer || !contentCol) return;
+
+      const assets = [
+        { src: 'img/CaseStudy3/Koi%20sticker.png',    rest: -4   },
+        { src: 'img/CaseStudy3/Palm%20sticker.png',    rest:  3   },
+        { src: 'img/CaseStudy3/Turtle%20sticker.png',  rest: -2.5 },
+        { src: 'img/CaseStudy3/Cactus%20sticker.png',  rest:  3.5 }
+      ];
+
+      const STICKER_W = 145;  // matches CSS .sticker width
+      const START_Y   = 300;
+      const END_PAD   = 400;
+      const SPACING   = 700;
+
+      function buildStickers() {
+        layer.innerHTML = '';
+        const pageH  = document.documentElement.scrollHeight;
+        const usable = pageH - START_Y - END_PAD;
+        const count  = Math.max(4, Math.floor(usable / SPACING));
+
+        for (let i = 0; i < count; i++) {
+          const a   = assets[i % assets.length];
+          const img = document.createElement('img');
+          img.src   = a.src;
+          img.alt   = '';
+          img.className = 'sticker';
+          img.dataset.side = (i % 2 === 0) ? 'left' : 'right';
+          img.style.top = Math.round(START_Y + i * (usable / count)) + 'px';
+          img.style.setProperty('--rest', a.rest + 'deg');
+          img.style.rotate = a.rest + 'deg';
+          img.setAttribute('draggable', 'false');
+          layer.appendChild(img);
+        }
+        positionStickers();
+      }
+
+      function positionStickers() {
+        const rect = contentCol.getBoundingClientRect();
+        const vw   = window.innerWidth;
+        const half = STICKER_W / 2;
+        const pad  = 12;
+
+        const leftGutterCenter  = rect.left / 2;
+        const rightGutterCenter = rect.right + (vw - rect.right) / 2;
+
+        layer.querySelectorAll('.sticker').forEach(s => {
+          const isLeft = s.dataset.side === 'left';
+          let cx = isLeft ? leftGutterCenter : rightGutterCenter;
+          cx = Math.max(half + pad, Math.min(cx, vw - half - pad));
+          if (isLeft) cx = Math.min(cx, rect.left - half - 4);
+          else        cx = Math.max(cx, rect.right + half + 4);
+          s.style.left = Math.round(cx - half) + 'px';
+        });
+      }
+
+      buildStickers();
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(positionStickers, 150);
+      });
+    })();
+
+    // ===== CAROUSEL INIT =====
+    document.querySelectorAll('[data-carousel]').forEach(container => {
+      const track = container.querySelector('.carousel-track');
+      const prevBtn = container.querySelector('.carousel-btn--prev');
+      const nextBtn = container.querySelector('.carousel-btn--next');
+      if (!track) return;
+
+      function getSlideWidth() {
+        const slide = track.querySelector('.carousel-slide');
+        return slide ? slide.offsetWidth : track.offsetWidth;
+      }
+
+      function scrollBy(dir) {
+        track.scrollBy({ left: dir * getSlideWidth(), behavior: 'smooth' });
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', () => scrollBy(-1));
+      if (nextBtn) nextBtn.addEventListener('click', () => scrollBy(1));
+
+      container.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); scrollBy(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); scrollBy(1); }
+      });
+    });
+  </script>
+</body>
+</html>

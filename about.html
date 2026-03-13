@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About – Avilenne Lara</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href="img/avi brand logo.svg" />
+  <style>
+    @font-face {
+      font-family: 'Awesome';
+      src: url('fonts/awesome-light.otf') format('opentype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    
+    @font-face {
+      font-family: 'Awesome';
+      src: url('fonts/awesome-medium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Freight Text Pro Semibold';
+      src: url('fonts/fonnts.com-Freight-Text-Pro-Semibold-.otf') format('opentype');
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Manrope-Medium';
+      src: url('fonts/Manrope-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    :root {
+      --bg: #f5f5f7;
+      --bg-elevated: #ffffff;
+      --bg-gradient-start: #ffffff;
+      --bg-gradient-end: #f5f5f7;
+      --bg-section: #f9fafb;
+      --text-main: #2f332f;
+      --text-muted: #7a7a80;
+      --accent: #0071e3;
+      --accent-soft: rgba(0, 113, 227, 0.08);
+      --nav-bg: rgba(245, 245, 247, 0.55);
+      --nav-bg-scrolled: rgba(245, 245, 247, 0.75);
+      --logo-bg: rgba(255, 255, 255, 0.9);
+      --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.7), 0 6px 12px rgba(0, 0, 0, 0.12);
+      --shadow-md: 0 14px 40px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.03);
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --transition-fast: 180ms ease-out;
+    }
+
+    body.dark-mode {
+      --bg: #0a0a0f;
+      --bg-elevated: #1a1a24;
+      --bg-gradient-start: #1a1a24;
+      --bg-gradient-end: #0a0a0f;
+      --bg-section: #14141f;
+      --text-main: #e8e8ed;
+      --text-muted: #9a9aa5;
+      --accent: #4a9eff;
+      --accent-soft: rgba(74, 158, 255, 0.15);
+      --nav-bg: rgba(10, 10, 15, 0.55);
+      --nav-bg-scrolled: rgba(10, 10, 15, 0.75);
+      --logo-bg: rgba(26, 26, 36, 0.9);
+      --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 6px 12px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 14px 40px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Manrope-Medium", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at top, var(--bg-gradient-start) 0, var(--bg-gradient-end) 52%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      padding-top: 72px;
+      padding-bottom: 0;
+      transition: background 0.3s ease, color 0.3s ease;
+      cursor: none;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Paper texture overlay - scrolls with content, crisp and continuous */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('img/paper.png');
+      background-repeat: repeat;
+      background-size: 500px 593px;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body.dark-mode::before {
+      opacity: 0.18;
+    }
+
+    /* Ensure all direct children of body are above the texture */
+    body > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    body.transitioning {
+      overflow: hidden;
+    }
+
+    /* Global heading styles - ensure all headings use Freight Text Pro Semibold */
+    h1, h2, h3 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-weight: 600;
+    }
+
+    /* Custom Cursor */
+    * {
+      cursor: none !important;
+    }
+    
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 2147483647;
+      transform: translate(-50%, -50%);
+      background: #2f332f;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+      will-change: transform;
+      opacity: 1;
+      display: block;
+      visibility: visible;
+    }
+
+    body.dark-mode .custom-cursor {
+      background: #e8e8ed;
+      border: 2px solid #0a0a0f;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    body.hovering-link .custom-cursor {
+      transform: translate(-50%, -50%) scale(1.3);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* NAVBAR */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 24px 48px;
+      pointer-events: none;
+      transition: all 0.35s ease;
+    }
+
+    .nav__inner {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-bottom: 16px;
+      pointer-events: auto;
+      background: transparent;
+      transition: all 0.35s ease;
+    }
+
+    body.dark-mode .nav__inner {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* Floating pill state */
+    .nav.nav--floating {
+      top: 0;
+    }
+
+    .nav.nav--floating .nav__inner {
+      max-width: 760px;
+      padding: 10px 24px;
+      border-bottom: none;
+      border-radius: 999px;
+      background: rgba(230, 230, 235, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+    }
+
+    body.dark-mode .nav.nav--floating .nav__inner {
+      background: rgba(20, 20, 25, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      transition: gap 0.25s ease;
+    }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      transition: gap 0.25s ease;
+    }
+
+    .nav.nav--floating .nav-left,
+    .nav.nav--floating .nav-right {
+      gap: 16px;
+    }
+
+    .nav.nav--floating .nav-center {
+      gap: 16px;
+    }
+
+    .nav.nav--floating .nav-left {
+      padding-right: 20px;
+      margin-right: 16px;
+      border-right: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    body.dark-mode .nav.nav--floating .nav-left {
+      border-right-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .brand-logo-link {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .brand-logo {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-link-group {
+      display: flex;
+      gap: 24px;
+      font-size: 15px;
+      color: var(--text-main);
+    }
+
+    .nav-link {
+      font-family: "Manrope-Medium", system-ui, sans-serif;
+      position: relative;
+      padding: 4px 0;
+      cursor: pointer;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2.5px;
+      border-radius: 999px;
+      background: #c92380;
+      transition: width var(--transition-fast);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.nav-link--primary {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #c92380;
+      color: var(--bg-elevated);
+      font-size: 14px;
+      transition: opacity var(--transition-fast), background var(--transition-fast);
+    }
+
+    .nav-link.nav-link--primary:hover {
+      opacity: 0.85;
+      background: #b01e6f;
+    }
+
+    .nav-link.nav-link--primary::after {
+      display: none;
+    }
+
+    .dark-mode-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: var(--logo-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform var(--transition-fast), background var(--transition-fast);
+    }
+
+    .dark-mode-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .dark-mode-toggle svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .dark-mode-toggle:active svg {
+      transform: rotate(180deg);
+    }
+
+    /* PAGE */
+    .page {
+      max-width: 90%;
+      margin: 0 auto;
+      padding: 60px 20px 80px;
+    }
+
+    /* ABOUT HERO */
+    .about-hero {
+      max-width: 1100px;
+      margin: 0 auto 120px;
+      display: grid;
+      grid-template-columns: 35fr 65fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-image-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Sticker collage */
+    .about-sticker-stack {
+      position: relative;
+      width: clamp(240px, 28vw, 380px);
+      height: clamp(280px, 34vw, 440px);
+    }
+
+    .about-sticker-stack .sticker {
+      position: absolute;
+      user-select: none;
+      -webkit-user-drag: none;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.10));
+    }
+
+    .about-sticker-stack .sticker.irl {
+      width: 88%;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      rotate: -3deg;
+    }
+
+    .about-sticker-stack .sticker.avi {
+      position: absolute;
+      width: 85%;
+      bottom: 5%;
+      left: 40%;
+      right: 0;
+      z-index: 2;
+      rotate: 4deg;
+    }
+
+    .about-sticker-stack .sticker.ribbon {
+      position: absolute;
+      width: 50%;
+      top: 0;
+      left: 75%;
+      transform: translateX(-50%);
+      z-index: 3;
+      rotate: -2deg;
+    }
+
+    .about-text h1 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-weight: 600;
+      font-size: clamp(36px, 5vw, 52px);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 32px;
+    }
+
+    .about-text h1 .emoticon {
+      font-family: 'Manrope-Medium', system-ui, sans-serif;
+    }
+
+    .about-text p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+
+    .section-heading {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 60px;
+    }
+
+    .numbered-list {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
+
+    .numbered-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .item-number {
+      font-family: 'Awesome', system-ui, -apple-system, sans-serif;
+      font-size: 72px;
+      font-weight: 500;
+      color: var(--accent);
+      opacity: 0.3;
+      line-height: 1;
+    }
+
+    .item-content h3 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .item-content p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* EXPERIENCE & EDUCATION */
+    .experience,
+    .education {
+      max-width: 1100px;
+      margin: 0 auto 120px;
+    }
+
+    .experience-list,
+    .education-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .experience-group {
+      margin-bottom: 40px;
+    }
+
+    .experience-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .experience-group-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+    }
+
+    .experience-item,
+    .education-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+
+    .experience-item:last-child,
+    .education-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .experience-group .experience-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .experience-row,
+    .education-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+    }
+
+    .experience-company,
+    .education-school {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-main);
+      flex: 1;
+    }
+
+    .experience-date,
+    .education-date {
+      font-size: 14px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .experience-role,
+    .education-degree {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* HOBBIES GRID */
+    .hobbies {
+      max-width: 1100px;
+      margin: 0 auto 120px;
+    }
+
+    .hobbies-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .hobby-card {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hobby-card h3 {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .hobby-card p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      flex: 1;
+    }
+
+    .hobby-images {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .hobby-image {
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(135deg, #f0f0f5 0%, #e5f1ff 100%);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      cursor: zoom-in;
+    }
+
+    .hobby-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: inherit;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      will-change: transform;
+    }
+
+    .hobby-image:hover img {
+      transform: scale(1.03);
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.22);
+    }
+
+    /* Lightbox overlay for hobby images */
+    .hobby-lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .hobby-lightbox.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hobby-lightbox-inner {
+      max-width: min(90vw, 960px);
+      max-height: 90vh;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    .hobby-lightbox-inner img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #050509;
+    }
+
+        /* FOOTER */
+    footer {
+      padding-top: 52px;
+      margin-top: 64px;
+    }
+
+    .footer-inner {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+      min-height: 300px;
+    }
+
+    .footer-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .footer-divider {
+      font-size: clamp(16px, 1.6vw, 20px);
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      user-select: none;
+    }
+
+    .footer-heading {
+      font-family: 'Freight Text Pro Semibold', serif;
+      font-size: clamp(34px, 4vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 36px;
+    }
+
+    .footer-link {
+      font-family: 'Manrope-Medium', system-ui, sans-serif;
+      font-size: clamp(16px, 1.5vw, 19px);
+      color: var(--text-muted);
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .footer-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: #c92380;
+      transition: width var(--transition-fast);
+    }
+
+    .footer-link:hover::after {
+      width: 100%;
+    }
+
+    .footer-meta {
+      font-family: 'Manrope-Medium', system-ui, sans-serif;
+      font-size: clamp(13px, 1.1vw, 15px);
+      line-height: 1.7;
+      color: var(--text-muted);
+      opacity: 0.7;
+      margin-top: 8px;
+    }
+
+    .footer-image-wrap {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: flex-end;
+      overflow: visible;
+    }
+
+    .footer-sticker-link {
+      display: block;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .footer-sticker-link:hover {
+      animation: footerStickerSwing 0.5s ease-in-out;
+    }
+
+    .footer-sticker-link:focus-visible {
+      outline: 2px solid var(--text-main);
+      outline-offset: 4px;
+      border-radius: 8px;
+    }
+
+    .footer-sticker-link.is-clicked .footer-image {
+      animation: footerStickerPop 0.35s ease-out;
+    }
+
+    @keyframes footerStickerSwing {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-4deg); }
+      50% { transform: rotate(2deg); }
+      75% { transform: rotate(-1deg); }
+    }
+
+    @keyframes footerStickerPop {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.08); }
+      70% { transform: scale(0.98); }
+      100% { transform: scale(1); }
+    }
+
+    .footer-image {
+      width: 100%;
+      max-width: 440px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 26px 60px rgba(0, 0, 0, 0.22));
+    }
+
+
+    /* FIXED FOOTER OVERLAY */
+    .fixed-footer-overlay {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      z-index: 999;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      mask-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.85) 30%,
+        rgba(0, 0, 0, 0.5) 60%,
+        rgba(0, 0, 0, 0.2) 80%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 0.85) 30%,
+        rgba(0, 0, 0, 0.5) 60%,
+        rgba(0, 0, 0, 0.2) 80%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      background: linear-gradient(
+        to top,
+        rgba(245, 245, 247, 0.15) 0%,
+        rgba(245, 245, 247, 0.1) 25%,
+        rgba(245, 245, 247, 0.06) 50%,
+        rgba(245, 245, 247, 0.03) 75%,
+        rgba(245, 245, 247, 0) 100%
+      );
+      pointer-events: none;
+      transition: background 0.3s ease;
+    }
+
+    body.dark-mode .fixed-footer-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(26, 26, 36, 0.15) 0%,
+        rgba(26, 26, 36, 0.1) 25%,
+        rgba(26, 26, 36, 0.06) 50%,
+        rgba(26, 26, 36, 0.03) 75%,
+        rgba(26, 26, 36, 0) 100%
+      );
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav {
+        padding: 0 16px;
+      }
+
+      .nav-right .nav-link-group {
+        display: none;
+      }
+
+      .page {
+        padding-inline: 16px;
+      }
+
+      .about-hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .about-hero .about-text {
+        order: 2;
+      }
+
+      .about-hero .about-image-wrap {
+        order: 1;
+      }
+
+      .about-sticker-stack {
+        width: clamp(220px, 50vw, 300px);
+        height: clamp(260px, 56vw, 340px);
+      }
+
+      .numbered-item {
+        grid-template-columns: 60px 1fr;
+        gap: 24px;
+      }
+
+      .item-number {
+        font-size: 56px;
+      }
+
+      .hobbies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+            .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-image {
+        max-width: 340px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .about-sticker-stack {
+        width: clamp(200px, 60vw, 280px);
+        height: clamp(240px, 68vw, 320px);
+      }
+
+      .numbered-item {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .item-number {
+        font-size: 48px;
+      }
+
+      .experience-row,
+      .education-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .experience-company,
+      .education-school {
+        font-size: 14px;
+      }
+
+      .experience-date,
+      .education-date {
+        font-size: 13px;
+      }
+
+      .experience-role,
+      .education-degree {
+        font-size: 14px;
+      }
+
+      .hobby-images {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .hobbies-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hobbies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+
+  <!-- NAVBAR -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <div class="nav-left">
+        <a href="/" class="brand-logo-link">
+          <img src="img/avi brand logo.svg" alt="Avi logo" class="brand-logo" />
+        </a>
+      </div>
+      <nav class="nav-center nav-link-group">
+        <a class="nav-link" href="work.html">Work</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="playground.html" id="playground-link">Playground</a>
+        <a class="nav-link" href="https://docs.google.com/file/d/1FcgBev2uLHajdEr-AR8Y8zZowP1TgBxC9SiynNh5iCk/view" target="_blank" rel="noopener noreferrer">Resume</a>
+      </nav>
+      <div class="nav-right">
+        <a class="nav-link nav-link--primary" href="mailto:lara.avilenne@gmail.com" aria-label="Email Avi">
+          Contact
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page">
+      <!-- ABOUT HERO -->
+      <section class="about-hero">
+        <div class="about-image-wrap">
+          <div class="about-sticker-stack" aria-hidden="true">
+            <img class="sticker irl" src="img/About/Avi%20irl%20sticker.png" alt="" draggable="false" />
+            <img class="sticker avi" src="img/About/Avi%20about%20sticker.png" alt="" draggable="false" />
+            <img class="sticker ribbon" src="img/About/Ribbon%20sticker%203.png" alt="" draggable="false" />
+          </div>
+        </div>
+        <div class="about-text">
+          <h1>Nice to meet you! <span class="emoticon">ଘ(੭˃ᴗ˂)੭</span></h1>
+          <p>
+            I’m Avi, a UX/UI designer currently finishing my Honours Bachelor of Digital Experience Design at George Brown College in Toronto, Canada. I've always been drawn to the quieter side of design as I like creating interfaces that feel intuitive so people can focus on what they came to do, not on the interface itself.
+          </p>
+          <p>My work lives between research, interaction design, and visual detail. A lot of my design brain comes from spending years drawing and building my own little worlds, so I naturally look for character and relationships in the products I design too. I care about how a system treats people over time and how it speaks to them in stressful moments. When I’m not in Figma prototyping, I’m likely drawing or trying out new desserts.</p>
+         
+          <p>
+            You can reach me anytime at: <a href="mailto:lara.avilenne@gmail.com" style="text-decoration: underline; color: var(--accent);">lara.avilenne@gmail.com</a>.
+          </p>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="experience">
+        <h2 class="section-heading">Experience</h2>
+        <div class="experience-list">
+          <div class="experience-group">
+            <div class="experience-group-title">Design Experience</div>
+            
+            <div class="experience-item">
+              <div class="experience-row">
+                <div class="experience-company">YES!26 Design Committee</div>
+                <div class="experience-date">Jan 2026 – Apr 2026</div>
+              </div>
+              <div class="experience-role">Web Designer</div>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-row">
+                <div class="experience-company">Partners In Health – Donation Kiosk (Course Project)</div>
+                <div class="experience-date">Jan 2025 – Apr 2025</div>
+              </div>
+              <div class="experience-role">UX Research & Product Designer</div>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-row">
+                <div class="experience-company">Allan Gardens Wayfinding (Course Project)</div>
+                <div class="experience-date">Jan 2025 – Apr 2025</div>
+              </div>
+              <div class="experience-role">Designer & Information Architect</div>
+            </div>
+          </div>
+
+          <div class="experience-group">
+            <div class="experience-group-title">Other Work</div>
+            
+            <div class="experience-item">
+              <div class="experience-row">
+                <div class="experience-company">Stellar Culinary Personnel</div>
+                <div class="experience-date">Sept 2022 – Present</div>
+              </div>
+              <div class="experience-role">Team Member</div>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-row">
+                <div class="experience-company">Nike (Family Branch), Woodbury, NY</div>
+                <div class="experience-date">Dec 2022 – Jul 2024</div>
+              </div>
+              <div class="experience-role">Picker / Stock</div>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-row">
+                <div class="experience-company">Elections Ontario</div>
+                <div class="experience-date">May 2022 – Jun 2022</div>
+              </div>
+              <div class="experience-role">Information Assistant</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section class="education">
+        <h2 class="section-heading">Education</h2>
+        <div class="education-list">
+          <div class="education-item">
+            <div class="education-row">
+              <div class="education-school">George Brown College, Toronto</div>
+              <div class="education-date">Sept 2023 – Expected May 2027</div>
+            </div>
+            <div class="education-degree">Honours Bachelor of Digital Experience Design</div>
+          </div>
+
+          <div class="education-item">
+            <div class="education-row">
+              <div class="education-school">Saint Patrick's Catholic Secondary School, Toronto</div>
+              <div class="education-date">Graduated Jun 2022</div>
+            </div>
+            <div class="education-degree">High School Diploma</div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- HOBBIES -->
+      <section class="hobbies">
+        <h2 class="section-heading">When I'm not designing</h2>
+        <div class="hobbies-grid">
+          <div class="hobby-card">
+            <h3>Drawing & Sketching</h3>
+            <p>
+              Drawing is still my first language. I spend a lot of time sketching characters, outfits, and small scenes, either in a sketchbook or on my iPad.
+            </p>
+            <div class="hobby-images">
+              <div class="hobby-image"><img src="img/About/drawing-sketch1.jpeg" alt="Drawing Sketch 1"/></div>
+              <div class="hobby-image"><img src="img/About/drawing-sketch2.PNG" alt="Drawing Sketch 2"/></div>
+              <div class="hobby-image"><img src="img/About/drawing-sketch3.jpeg" alt="Drawing Sketch 3"/></div>
+            </div>
+          </div>
+
+          <div class="hobby-card">
+            <h3>Traveling</h3>
+            <p>
+              My family loves to travel, so summer usually means exploring a new city together, getting lost in side streets, and collecting photos and small details I can bring back into my work.
+            </p>
+            <div class="hobby-images">
+              <div class="hobby-image"><img src="img/About/travelling-photo-1.png" alt="Travelling Photo 1" /></div>
+              <div class="hobby-image"><img src="img/About/travelling-photo-2.png" alt="Travelling Photo 2" /></div>
+              <div class="hobby-image"><img src="img/About/travelling-photo-3.png" alt="Travelling Photo 3" /></div>
+            </div>
+          </div>
+
+          <div class="hobby-card">
+            <h3>Playing Video Games</h3>
+            <p>
+              I gravitate toward story-driven games with strong atmospheres, beautiful art, and gameplay that feels satisfying to learn over time. I love getting wrapped up in a world and then over-analyzing the characters afterward.
+            </p>
+            <div class="hobby-images">
+              <div class="hobby-image"><img src="img/About/Clair%20Obscur%20game%20icon.png" alt="Clair Obscur game icon" /></div>
+              <div class="hobby-image"><img src="img/About/omori%20game%20icon.png" alt="Omori game icon" /></div>
+              <div class="hobby-image"><img src="img/About/p3%20reload%20game%20icon.png" alt="Persona 3 Reload game icon" /></div>
+            </div>
+          </div>
+
+          <div class="hobby-card">
+            <h3>Music</h3>
+            <p>
+              I rarely go a day without music. Building playlists and revisiting favorite albums is one of my main ways to recharge and stay grounded.
+            </p>
+            <div class="hobby-images">
+              <div class="hobby-image"><img src="img/About/HUT%20album%20icon.jpeg" alt="Hurry Up Tomorrow Album Icon"></div>
+              <div class="hobby-image"><img src="img/About/phases-album-icon.jpeg" alt="Phases Album Icon"></div>
+              <div class="hobby-image"><img src="img/About/heroes-and-villains.jpg" alt="Heroes and Villains Album Icon"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div class="page">
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-text">
+            <p class="footer-divider" aria-hidden="true">♡.•♬✧⁽⁽ଘ( ˊᵕˋ )ଓ⁾⁾*+:•*∴✰</p>
+            <h2 class="footer-heading">Nice to see you here!</h2>
+            <div class="footer-links">
+              <a class="footer-link" href="mailto:lara.avilenne@gmail.com">Email ↗</a>
+              <a class="footer-link" href="https://www.linkedin.com/in/avilennelara" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            </div>
+            <p class="footer-meta">Made with luv © 2026 Avilenne Lara 🎀<br>This website is best viewed on desktop.</p>
+          </div>
+        <div class="footer-image-wrap">
+          <a class="footer-sticker-link" href="mailto:lara.avilenne@gmail.com" aria-label="Email me to connect">
+            <img class="footer-image" src="img/homepage/avi-lets-connect-sticker.png" alt="Let's connect sticker" />
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Fixed Footer Overlay -->
+  <div class="fixed-footer-overlay"></div>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Universal Page Transitions -->
+  <script src="js/page-transitions.js"></script>
+  
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Navbar floating pill animation
+    const nav = document.getElementById("nav");
+    
+    function handleNavbarScroll() {
+      if (window.scrollY > 80) {
+        nav.classList.add("nav--floating");
+      } else {
+        nav.classList.remove("nav--floating");
+      }
+    }
+    
+    // Throttle scroll events for better performance
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleNavbarScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+    
+    // Check initial scroll position
+    handleNavbarScroll();
+
+    // Dark mode - apply saved preference
+    const isDarkMode = localStorage.getItem("darkMode") === "true";
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+    }
+    
+    // Setup toggle if it exists
+    const darkModeToggle = document.getElementById("darkModeToggle") || document.querySelector('.dark-mode-toggle');
+    if (darkModeToggle) {
+      const sunIcon = darkModeToggle.querySelector(".sun-icon") || document.querySelector('.sun-icon');
+      const moonIcon = darkModeToggle.querySelector(".moon-icon") || document.querySelector('.moon-icon');
+      
+      if (isDarkMode && sunIcon && moonIcon) {
+        sunIcon.style.display = "none";
+        moonIcon.style.display = "block";
+      }
+      
+      darkModeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        const isNowDark = document.body.classList.contains("dark-mode");
+        
+        if (sunIcon && moonIcon) {
+          if (isNowDark) {
+            sunIcon.style.display = "none";
+            moonIcon.style.display = "block";
+          } else {
+            sunIcon.style.display = "block";
+            moonIcon.style.display = "none";
+          }
+        }
+        
+        localStorage.setItem("darkMode", isNowDark);
+      });
+    }
+
+    // Custom cursor
+    const cursor = document.querySelector('.custom-cursor');
+    let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+    
+    // Smooth cursor follow - optimized with requestAnimationFrame
+    let rafId = null;
+    function updateCursor() {
+      const dx = mouseX - cursorX;
+      const dy = mouseY - cursorY;
+      
+      cursorX += dx * 0.2;
+      cursorY += dy * 0.2;
+      
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      
+      rafId = requestAnimationFrame(updateCursor);
+    }
+    updateCursor();
+    
+    document.querySelectorAll('a, button, .back-link, .logo').forEach(element => {
+      element.addEventListener('mouseenter', () => document.body.classList.add('hovering-link'));
+      element.addEventListener('mouseleave', () => document.body.classList.remove('hovering-link'));
+    });
+
+    // ===== PAGE TRANSITIONS =====
+    
+    // Optimized page transition function - lighter and smoother
+    let transitionTimeline = null;
+    
+    function transitionToPage(url) {
+      // Kill any existing transition
+      if (transitionTimeline) {
+        transitionTimeline.kill();
+        transitionTimeline = null;
+      }
+      
+      document.body.classList.add('transitioning');
+      
+      // Lighter transition - only opacity, no scale/transform
+      transitionTimeline = gsap.to('main', {
+        opacity: 0,
+        duration: 0.25,
+        ease: "power2.in",
+        overwrite: true,
+        onComplete: () => {
+          transitionTimeline = null;
+          window.location.href = url;
+        }
+      });
+    }
+
+    // Check if we're entering from another page
+    const pageTransition = sessionStorage.getItem('pageTransition');
+    
+    if (pageTransition) {
+      // Kill any existing transition
+      if (transitionTimeline) {
+        transitionTimeline.kill();
+        transitionTimeline = null;
+      }
+      
+      gsap.set('main', { opacity: 0 });
+      transitionTimeline = gsap.to('main', {
+        opacity: 1,
+        duration: 0.3,
+        ease: "power2.out",
+        overwrite: true,
+        onComplete: () => {
+          document.body.classList.remove('transitioning');
+          transitionTimeline = null;
+        }
+      });
+      sessionStorage.removeItem('pageTransition');
+    }
+
+    // Hero section animations
+    gsap.from(".about-hero .about-image-wrap", {
+      scrollTrigger: {
+        trigger: ".about-hero",
+        start: "top 75%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+      y: 24,
+      duration: 0.7,
+      ease: "power2.out"
+    });
+
+    gsap.from(".about-hero .about-text h1", {
+      scrollTrigger: {
+        trigger: ".about-hero",
+        start: "top 75%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+      y: 20,
+      duration: 0.7,
+      ease: "power2.out",
+      delay: 0.1
+    });
+
+    gsap.from(".about-hero .about-text p", {
+      scrollTrigger: {
+        trigger: ".about-hero",
+        start: "top 75%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+      y: 16,
+      stagger: 0.08,
+      duration: 0.6,
+      ease: "power2.out",
+      delay: 0.2
+    });
+
+    // Experience section animations
+    gsap.from(".experience .section-heading", {
+      scrollTrigger: {
+        trigger: ".experience",
+        start: "top 75%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+      y: 24,
+      duration: 0.7,
+      ease: "power2.out"
+    });
+
+    gsap.from(".experience-group-title", {
+      scrollTrigger: {
+        trigger: ".experience",
+        start: "top 70%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+      y: 20,
+      stagger: 0.1,
+      duration: 0.6,
+      ease: "power2.out",
+      delay: 0.2
+    });
+
+    gsap.from(".experience-item", {
+      scrollTrigger: {
+        trigger: ".experience",
+        start: "top 70%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+      y: 18,
+      stagger: 0.08,
+      duration: 0.6,
+      ease: "power2.out",
+      delay: 0.3
+    });
+
+    // Education section animations
+    gsap.from(".education .section-heading", {
+      scrollTrigger: {
+        trigger: ".education",
+        start: "top 75%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+      y: 24,
+      duration: 0.7,
+      ease: "power2.out"
+    });
+
+    gsap.from(".education-item", {
+      scrollTrigger: {
+        trigger: ".education",
+        start: "top 70%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+      y: 18,
+      stagger: 0.1,
+      duration: 0.6,
+      ease: "power2.out",
+      delay: 0.2
+    });
+
+
+    // "When I'm not designing" section animations
+    gsap.from(".hobbies .section-heading", {
+      scrollTrigger: {
+        trigger: ".hobbies",
+        start: "top 75%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+      y: 24,
+      duration: 0.7,
+      ease: "power2.out"
+    });
+
+    gsap.from(".hobby-card", {
+      scrollTrigger: {
+        trigger: ".hobbies",
+        start: "top 70%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      opacity: 0,
+      y: 20,
+      stagger: 0.1,
+      duration: 0.7,
+      ease: "power2.out",
+      delay: 0.15
+    });
+
+    // === Hobby image lightbox (zoom-on-click) ===
+    (function initHobbyLightbox() {
+      const images = document.querySelectorAll('.hobby-image img');
+      if (!images.length) return;
+
+      const lightbox = document.createElement('div');
+      lightbox.className = 'hobby-lightbox';
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightbox.innerHTML = '<div class="hobby-lightbox-inner"><img alt="" /></div>';
+      document.body.appendChild(lightbox);
+
+      const lightboxImg = lightbox.querySelector('img');
+
+      function openLightbox(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        lightbox.classList.add('is-visible');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        if (!lightbox.classList.contains('is-visible')) return;
+        lightbox.classList.remove('is-visible');
+        document.body.style.overflow = '';
+      }
+
+      images.forEach((img) => {
+        img.addEventListener('click', () => {
+          openLightbox(img.currentSrc || img.src, img.alt);
+        });
+      });
+
+      lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeLightbox();
+        }
+      });
+    })();
+
+    // ===== FOOTER ANIMATIONS =====
+
+    // Footer heading
+    gsap.from(".footer-heading", {
+      scrollTrigger: {
+        trigger: "footer",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      },
+      opacity: 0,
+      x: -50,
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    // Footer note
+    gsap.from(".footer-text", {
+      scrollTrigger: {
+        trigger: "footer",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      },
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      delay: 0.2,
+      ease: "power3.out"
+    });
+
+    // Footer image - slide in from right with rotation
+    gsap.from(".footer-image", {
+      scrollTrigger: {
+        trigger: "footer",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      },
+      opacity: 0,
+      x: 100,
+      rotation: 5,
+      duration: 1.2,
+      delay: 0.3,
+      ease: "power3.out"
+    });
+
+    // Footer sticker click pop
+    const footerStickerLink = document.querySelector(".footer-sticker-link");
+    if (footerStickerLink) {
+      footerStickerLink.addEventListener("click", function () {
+        this.classList.add("is-clicked");
+        setTimeout(() => this.classList.remove("is-clicked"), 350);
+      });
+    }
+
+    // Handle back link and logo clicks
+    const backLink = document.querySelector('.back-link');
+    const logoLink = document.querySelector('.logo');
+    
+    if (backLink) {
+      backLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        sessionStorage.setItem('pageTransition', 'returning');
+        transitionToPage('index.html');
+      });
+    }
+    
+    if (logoLink) {
+      logoLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        sessionStorage.setItem('pageTransition', 'returning');
+        transitionToPage('index.html');
+      });
+    }
+  </script>
+</body>
+</html>
+
